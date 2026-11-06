@@ -1,10 +1,19 @@
 using dassh_board;
+using MySql.Data.MySqlClient;
+using pantalla_inicio;
+
 
 namespace Apartado_de_Libros_proyecto_progra_III
 {
     public partial class AddLibro1 : Form
-    {// Variable para recordar la ruta de la imagen seleccionada por el usuario
+    {
+        //Creo el objeto para la conexion
+        conexion bd = new conexion();
+
+
+        // Variable para recordar la ruta de la imagen seleccionada por el usuario
         private string rutaImagenSeleccionada = "";
+       
 
         // Propiedad pública que devolverá el libro registrado a la ventana principal
         public Libro NuevoLibro { get; private set; }
@@ -113,6 +122,37 @@ namespace Apartado_de_Libros_proyecto_progra_III
 
         private void GuardarInformacionLibroBoton_Click(object sender, EventArgs e)
         {
+            //hago que la imagen se guarde en la carpeta portadas libros
+          //  ImagenLibroPictureBox.Image.save("PortadasLibros"+ +".jpg");
+
+
+
+            //creo la conexion 
+          //  using (MySqlConnection conexion = bd.ObtenerConexion())
+            //{
+                // abro la conexión
+              //  conexion.Open();
+                //MySqlCommand comando = new MySqlCommand("INSERT INTO libros(portada) VALUES(@rutaportada)", conexion);
+                //comando.Parameters.AddWithValue("@rutaportada", rutaImagenSeleccionada);
+
+
+
+
+
+
+
+
+
+                // cierro la conexión
+                //conexion.Close();
+            //}
+
+
+
+
+
+
+
             Dashboard1 dashboard = new Dashboard1();
 
             dashboard.FormClosed += (s, args) => Application.Exit();
@@ -153,6 +193,11 @@ namespace Apartado_de_Libros_proyecto_progra_III
         }
 
         private void GeneroLiterarioComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ImagenLibroPictureBox_Click(object sender, EventArgs e)
         {
 
         }

@@ -17,9 +17,10 @@ namespace pantalla_inicio
             conexion.CrearBaseSiNoExiste();
             Application.Run(new Inicio());
 
+            //aqui voy a crear la carpeta portadas_libros en el bin llamando a el metodo de la clase crear_carpeta
 
-
-
+            var carpeta = new crear_carpeta();
+            carpeta.CrearCarpetaSiNoExiste();
 
 
 
