@@ -3,8 +3,6 @@
 -- Host: localhost    Database: biblioteca_copia
 -- ------------------------------------------------------
 -- Server version	10.4.32-MariaDB
-CREATE DATABASE IF NOT EXISTS biblioteca_copia CHARACTER SET utf8mb4;
-USE biblioteca_copia;
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -21,10 +19,10 @@ USE biblioteca_copia;
 -- Table structure for table `autores`
 --
 
-
+DROP TABLE IF EXISTS `autores`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE IF NOT EXISTS `autores` (
+CREATE TABLE `autores` (
   `id_autor` int(11) NOT NULL AUTO_INCREMENT,
   `id_usuario` int(11) DEFAULT NULL,
   `nombre` varchar(100) DEFAULT NULL,
@@ -47,10 +45,10 @@ UNLOCK TABLES;
 -- Table structure for table `genero`
 --
 
-
+DROP TABLE IF EXISTS `genero`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE IF NOT EXISTS `genero` (
+CREATE TABLE `genero` (
   `id_genero` int(11) NOT NULL AUTO_INCREMENT,
   `genero` varchar(50) NOT NULL,
   PRIMARY KEY (`id_genero`)
@@ -71,9 +69,10 @@ UNLOCK TABLES;
 -- Table structure for table `genero_libro`
 --
 
+DROP TABLE IF EXISTS `genero_libro`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE IF NOT EXISTS `genero_libro` (
+CREATE TABLE `genero_libro` (
   `id_libro` int(11) NOT NULL,
   `id_genero` int(11) NOT NULL,
   PRIMARY KEY (`id_libro`,`id_genero`),
@@ -96,10 +95,10 @@ UNLOCK TABLES;
 -- Table structure for table `libros`
 --
 
-
+DROP TABLE IF EXISTS `libros`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE  IF NOT EXISTS `libros` (
+CREATE TABLE `libros` (
   `id_libro` int(11) NOT NULL AUTO_INCREMENT,
   `id_usuario` int(11) DEFAULT NULL,
   `id_autor` int(11) NOT NULL,
@@ -108,6 +107,7 @@ CREATE TABLE  IF NOT EXISTS `libros` (
   `fecha_fin` date DEFAULT NULL,
   `calificacion` int(11) DEFAULT NULL,
   `reseña` varchar(500) DEFAULT NULL,
+  `portada` varchar(512) DEFAULT NULL,
   PRIMARY KEY (`id_libro`),
   KEY `fk_autor` (`id_autor`),
   KEY `id_usuario` (`id_usuario`),
@@ -129,14 +129,15 @@ UNLOCK TABLES;
 -- Table structure for table `usuario`
 --
 
+DROP TABLE IF EXISTS `usuario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE IF NOT EXISTS `usuario` (
+CREATE TABLE `usuario` (
   `id_usuario` int(11) NOT NULL AUTO_INCREMENT,
   `nombre_usuario` varchar(50) NOT NULL,
   `contraseña` varchar(60) NOT NULL,
   PRIMARY KEY (`id_usuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -145,6 +146,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
+INSERT INTO `usuario` VALUES (1,'Shannon','');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -157,4 +159,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-10-16 23:53:54
+-- Dump completed on 2026-11-06 10:25:21
