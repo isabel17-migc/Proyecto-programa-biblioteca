@@ -36,8 +36,8 @@
             btnusuario = new Button();
             btnagg = new Button();
             textBox1 = new TextBox();
-            comboBox1 = new ComboBox();
-            comboBox2 = new ComboBox();
+            cb_estre = new ComboBox();
+            cb_autor = new ComboBox();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -142,23 +142,23 @@
             textBox1.TabIndex = 5;
             textBox1.TextChanged += textBox1_TextChanged;
             // 
-            // comboBox1
+            // cb_estre
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(582, 11);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(151, 28);
-            comboBox1.TabIndex = 6;
-            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
+            cb_estre.FormattingEnabled = true;
+            cb_estre.Location = new Point(582, 11);
+            cb_estre.Name = "cb_estre";
+            cb_estre.Size = new Size(151, 28);
+            cb_estre.TabIndex = 6;
+            cb_estre.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
-            // comboBox2
+            // cb_autor
             // 
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(750, 11);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(151, 28);
-            comboBox2.TabIndex = 7;
-            comboBox2.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
+            cb_autor.FormattingEnabled = true;
+            cb_autor.Location = new Point(750, 11);
+            cb_autor.Name = "cb_autor";
+            cb_autor.Size = new Size(151, 28);
+            cb_autor.TabIndex = 7;
+            cb_autor.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
             // 
             // Biblioteca1
             // 
@@ -167,8 +167,8 @@
             BackgroundImage = pantalla_inicio.Properties.Resources.FONDO3;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(928, 691);
-            Controls.Add(comboBox2);
-            Controls.Add(comboBox1);
+            Controls.Add(cb_autor);
+            Controls.Add(cb_estre);
             Controls.Add(textBox1);
             Controls.Add(panel1);
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -185,8 +185,8 @@
 
         private Panel panel1;
         private TextBox textBox1;
-        private ComboBox comboBox1;
-        private ComboBox comboBox2;
+        private ComboBox cb_estre;
+        private ComboBox cb_autor;
         private Button button1;
         private Button btncerrar;
         private Button btnbiblioteca;

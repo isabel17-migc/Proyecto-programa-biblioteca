@@ -31,8 +31,8 @@ namespace pantalla_inicio
 
         private void txtusuario_TextChanged(object sender, EventArgs e)
         {
-           
-         
+
+
 
         }
 
@@ -48,6 +48,14 @@ namespace pantalla_inicio
                 return;
             }
 
+            if (contraseña == "")
+            {
+                MessageBox.Show("Llena el campo de contraseña");
+                return;
+            }
+
+
+
             // creo la conexión llamando al método de mi clase
             using (MySqlConnection conexion = bd.ObtenerConexion())
             {
@@ -56,8 +64,9 @@ namespace pantalla_inicio
 
                 // pongo el ese comando
                 MySqlCommand comando = new MySqlCommand(
-                    "INSERT INTO usuario (nombre_usuario) VALUES (@nombre)", conexion);
+                    "INSERT INTO usuario (nombre_usuario, contraseña) VALUES (@nombre, @contraseña)", conexion);
                 comando.Parameters.AddWithValue("@nombre", nusuario);
+                comando.Parameters.AddWithValue("@contraseña", contraseña);
 
                 // aqui se inserta
                 comando.ExecuteNonQuery();
@@ -67,10 +76,15 @@ namespace pantalla_inicio
             }
 
             MessageBox.Show("Usuario guardado.");
+
+
         }
 
-        
+        private void txtcontra_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
-    
+
 }
 

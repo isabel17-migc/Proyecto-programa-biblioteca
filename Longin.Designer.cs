@@ -81,6 +81,7 @@
             txtcontra.Name = "txtcontra";
             txtcontra.Size = new Size(166, 27);
             txtcontra.TabIndex = 3;
+            txtcontra.UseSystemPasswordChar = true;
             txtcontra.TextChanged += txtcontra_TextChanged;
             // 
             // btnnext

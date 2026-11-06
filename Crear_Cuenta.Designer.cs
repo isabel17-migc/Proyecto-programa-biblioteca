@@ -69,9 +69,10 @@
             txtcontra.Location = new Point(284, 377);
             txtcontra.Margin = new Padding(3, 4, 3, 4);
             txtcontra.Name = "txtcontra";
-            txtcontra.PasswordChar = '*';
             txtcontra.Size = new Size(175, 27);
             txtcontra.TabIndex = 14;
+            txtcontra.UseSystemPasswordChar = true;
+            txtcontra.TextChanged += txtcontra_TextChanged;
             // 
             // txtusuario
             // 
