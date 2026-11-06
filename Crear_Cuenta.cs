@@ -40,6 +40,7 @@ namespace pantalla_inicio
         {
 
             string nusuario = txtusuario.Text.Trim();
+            string contraseña = txtcontra.Text.Trim();
 
             if (nusuario == "")
             {

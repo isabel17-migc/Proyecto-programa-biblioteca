@@ -66,10 +66,11 @@
             // 
             // txtcontra
             // 
-            txtcontra.Location = new Point(309, 379);
+            txtcontra.Location = new Point(284, 377);
             txtcontra.Margin = new Padding(3, 4, 3, 4);
             txtcontra.Name = "txtcontra";
-            txtcontra.Size = new Size(166, 27);
+            txtcontra.PasswordChar = '*';
+            txtcontra.Size = new Size(175, 27);
             txtcontra.TabIndex = 14;
             // 
             // txtusuario
