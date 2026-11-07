@@ -108,6 +108,7 @@ CREATE TABLE `libros` (
   `calificacion` int(11) DEFAULT NULL,
   `reseña` varchar(500) DEFAULT NULL,
   `portada` varchar(512) DEFAULT NULL,
+  `paginas` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_libro`),
   KEY `fk_autor` (`id_autor`),
   KEY `id_usuario` (`id_usuario`),
@@ -137,7 +138,7 @@ CREATE TABLE `usuario` (
   `nombre_usuario` varchar(50) NOT NULL,
   `contraseña` varchar(60) NOT NULL,
   PRIMARY KEY (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -146,7 +147,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'Shannon','');
+INSERT INTO `usuario` VALUES (1,'Shannon',''),(2,'asfdas','');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -159,4 +160,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-11-06 10:25:21
+-- Dump completed on 2026-11-06 15:47:40

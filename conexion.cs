@@ -62,7 +62,7 @@ namespace pantalla_inicio
 
             if (existe == 0)
             {
-                string ruta = Path.Combine(AppContext.BaseDirectory, "script_biblioteca_0.5.sql");
+                string ruta = Path.Combine(AppContext.BaseDirectory, "script_biblioteca_0.6.sql");
                 string sql = File.ReadAllText(ruta);
 
                 var script = new MySqlScript(conexion, sql);

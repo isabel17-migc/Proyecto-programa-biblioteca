@@ -87,6 +87,7 @@
             NombrarLibroTextBox.Name = "NombrarLibroTextBox";
             NombrarLibroTextBox.Size = new Size(398, 25);
             NombrarLibroTextBox.TabIndex = 2;
+            NombrarLibroTextBox.TextChanged += NombrarLibroTextBox_TextChanged;
             // 
             // SubirImagenLibroBoton
             // 
@@ -302,7 +303,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(700, 373);
+            ClientSize = new Size(700, 497);
             Controls.Add(lblEstrellas);
             Controls.Add(numUpDownCalificacionEstrellas);
             Controls.Add(GuardarInformacionLibroBoton);
