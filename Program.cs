@@ -12,7 +12,11 @@ namespace pantalla_inicio
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
 
-            
+
+
+
+            //aqui creo la base de datos
+
             var conexion = new conexion();
             conexion.CrearBaseSiNoExiste();
             Application.Run(new Inicio());

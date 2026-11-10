@@ -1,5 +1,6 @@
 using MySql.Data.MySqlClient; //importo biblioteca
 using pantalla_loig_in;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace pantalla_inicio
 {
@@ -53,7 +54,7 @@ namespace pantalla_inicio
                 MessageBox.Show("Llena el campo de contraseña");
                 return;
             }
-
+           
 
 
             // creo la conexión llamando al método de mi clase
