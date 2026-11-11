@@ -38,7 +38,10 @@
             textBox1 = new TextBox();
             cb_estre = new ComboBox();
             cb_autor = new ComboBox();
+            FlbBiblioteca = new FlowLayoutPanel();
+            fileSystemWatcher1 = new FileSystemWatcher();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)fileSystemWatcher1).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -52,9 +55,8 @@
             panel1.Controls.Add(btnagg);
             panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(0, 0);
-            panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(194, 691);
+            panel1.Size = new Size(170, 518);
             panel1.TabIndex = 4;
             panel1.Paint += panel1_Paint;
             // 
@@ -65,10 +67,9 @@
             button1.ForeColor = Color.DarkMagenta;
             button1.Image = pantalla_inicio.Properties.Resources.BIBLIOTECA;
             button1.ImageAlign = ContentAlignment.MiddleLeft;
-            button1.Location = new Point(10, 168);
-            button1.Margin = new Padding(3, 4, 3, 4);
+            button1.Location = new Point(9, 126);
             button1.Name = "button1";
-            button1.Size = new Size(171, 57);
+            button1.Size = new Size(150, 43);
             button1.TabIndex = 12;
             button1.Text = "  BIBLIOTECA";
             button1.UseVisualStyleBackColor = true;
@@ -79,12 +80,11 @@
             btncerrar.Font = new Font("Segoe UI Emoji", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btncerrar.Image = pantalla_inicio.Properties.Resources.cerrar_seccion;
             btncerrar.ImageAlign = ContentAlignment.TopLeft;
-            btncerrar.Location = new Point(10, 613);
-            btncerrar.Margin = new Padding(3, 4, 3, 4);
+            btncerrar.Location = new Point(9, 460);
             btncerrar.Name = "btncerrar";
-            btncerrar.Size = new Size(171, 40);
+            btncerrar.Size = new Size(150, 30);
             btncerrar.TabIndex = 11;
-            btncerrar.Text = "  Cerrar seción";
+            btncerrar.Text = "  Cerrar sesión";
             btncerrar.UseVisualStyleBackColor = true;
             btncerrar.Click += btncerrar_Click;
             // 
@@ -95,10 +95,9 @@
             btnbiblioteca.ForeColor = Color.DarkMagenta;
             btnbiblioteca.Image = pantalla_inicio.Properties.Resources.inicio1;
             btnbiblioteca.ImageAlign = ContentAlignment.MiddleLeft;
-            btnbiblioteca.Location = new Point(10, 43);
-            btnbiblioteca.Margin = new Padding(3, 4, 3, 4);
+            btnbiblioteca.Location = new Point(9, 32);
             btnbiblioteca.Name = "btnbiblioteca";
-            btnbiblioteca.Size = new Size(171, 57);
+            btnbiblioteca.Size = new Size(150, 43);
             btnbiblioteca.TabIndex = 8;
             btnbiblioteca.Text = "INICIO";
             btnbiblioteca.UseVisualStyleBackColor = true;
@@ -110,10 +109,9 @@
             btnusuario.ForeColor = Color.DarkMagenta;
             btnusuario.Image = pantalla_inicio.Properties.Resources.USUARIO;
             btnusuario.ImageAlign = ContentAlignment.MiddleLeft;
-            btnusuario.Location = new Point(10, 447);
-            btnusuario.Margin = new Padding(3, 4, 3, 4);
+            btnusuario.Location = new Point(9, 335);
             btnusuario.Name = "btnusuario";
-            btnusuario.Size = new Size(171, 57);
+            btnusuario.Size = new Size(150, 43);
             btnusuario.TabIndex = 10;
             btnusuario.Text = "    CUENTA/USUARIO";
             btnusuario.UseVisualStyleBackColor = true;
@@ -125,10 +123,9 @@
             btnagg.ForeColor = Color.DarkMagenta;
             btnagg.Image = pantalla_inicio.Properties.Resources.agregar_libro__2_;
             btnagg.ImageAlign = ContentAlignment.MiddleLeft;
-            btnagg.Location = new Point(10, 303);
-            btnagg.Margin = new Padding(3, 4, 3, 4);
+            btnagg.Location = new Point(9, 227);
             btnagg.Name = "btnagg";
-            btnagg.Size = new Size(171, 57);
+            btnagg.Size = new Size(150, 43);
             btnagg.TabIndex = 9;
             btnagg.Text = "     AGREGAR LIBROS";
             btnagg.UseVisualStyleBackColor = true;
@@ -136,47 +133,67 @@
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(215, 12);
+            textBox1.Location = new Point(188, 9);
+            textBox1.Margin = new Padding(3, 2, 3, 2);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(344, 27);
+            textBox1.Size = new Size(302, 23);
             textBox1.TabIndex = 5;
             textBox1.TextChanged += textBox1_TextChanged;
             // 
             // cb_estre
             // 
             cb_estre.FormattingEnabled = true;
-            cb_estre.Location = new Point(582, 11);
+            cb_estre.Location = new Point(509, 8);
+            cb_estre.Margin = new Padding(3, 2, 3, 2);
             cb_estre.Name = "cb_estre";
-            cb_estre.Size = new Size(151, 28);
+            cb_estre.Size = new Size(133, 23);
             cb_estre.TabIndex = 6;
             cb_estre.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // cb_autor
             // 
             cb_autor.FormattingEnabled = true;
-            cb_autor.Location = new Point(750, 11);
+            cb_autor.Location = new Point(656, 8);
+            cb_autor.Margin = new Padding(3, 2, 3, 2);
             cb_autor.Name = "cb_autor";
-            cb_autor.Size = new Size(151, 28);
+            cb_autor.Size = new Size(133, 23);
             cb_autor.TabIndex = 7;
             cb_autor.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
             // 
+            // FlbBiblioteca
+            // 
+            FlbBiblioteca.BackColor = Color.Transparent;
+            FlbBiblioteca.Location = new Point(172, 37);
+            FlbBiblioteca.Name = "FlbBiblioteca";
+            FlbBiblioteca.Size = new Size(637, 481);
+            FlbBiblioteca.TabIndex = 8;
+            FlbBiblioteca.Paint += FlbBiblioteca_Paint;
+            // 
+            // fileSystemWatcher1
+            // 
+            fileSystemWatcher1.EnableRaisingEvents = true;
+            fileSystemWatcher1.SynchronizingObject = this;
+            // 
             // Biblioteca1
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = pantalla_inicio.Properties.Resources.FONDO3;
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(928, 691);
+            ClientSize = new Size(812, 518);
+            Controls.Add(FlbBiblioteca);
             Controls.Add(cb_autor);
             Controls.Add(cb_estre);
             Controls.Add(textBox1);
             Controls.Add(panel1);
             Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(3, 2, 3, 2);
             Name = "Biblioteca1";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "The BookWorm Society";
             Load += Biblioteca1_Load;
             panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)fileSystemWatcher1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -192,5 +209,7 @@
         private Button btnbiblioteca;
         private Button btnusuario;
         private Button btnagg;
+        private FlowLayoutPanel FlbBiblioteca;
+        private FileSystemWatcher fileSystemWatcher1;
     }
 }

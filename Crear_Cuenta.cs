@@ -54,18 +54,18 @@ namespace pantalla_inicio
                 MessageBox.Show("Llena el campo de contraseña");
                 return;
             }
-           
+
 
 
             // creo la conexión llamando al método de mi clase
-            using (MySqlConnection conexion = bd.ObtenerConexion())
+            using (MySqlConnection cn = conexion.ObtenerConexion())
             {
                 // abro la conexión
-                conexion.Open();
+                cn.Open();
 
                 // pongo el ese comando
                 MySqlCommand comando = new MySqlCommand(
-                    "INSERT INTO usuario (nombre_usuario, contraseña) VALUES (@nombre, @contraseña)", conexion);
+                    "INSERT INTO usuario (nombre_usuario, contraseña) VALUES (@nombre, @contraseña)", cn);
                 comando.Parameters.AddWithValue("@nombre", nusuario);
                 comando.Parameters.AddWithValue("@contraseña", contraseña);
 
@@ -73,7 +73,7 @@ namespace pantalla_inicio
                 comando.ExecuteNonQuery();
 
                 // cierro la conexión
-                conexion.Close();
+                cn.Close();
             }
 
             MessageBox.Show("Usuario guardado.");

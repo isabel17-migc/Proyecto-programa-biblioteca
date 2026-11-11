@@ -3,13 +3,14 @@ using dassh_board;
 using MySql.Data.MySqlClient;
 using pantalla_inicio;
 using pantalla_loig_in;
+using System.Data;
 
 namespace Biblioteca
 {
     public partial class Biblioteca1 : Form
     {
 
-        conexion bd = new conexion();
+      
 
 
         public Biblioteca1()
@@ -39,49 +40,50 @@ namespace Biblioteca
 
         private void Biblioteca1_Load(object sender, EventArgs e)
         {
+           
+
             cb_estre.Items.Clear(); //Limpiamos primero el combobox de los items de la conexion anterior
             cb_autor.Items.Clear(); //Limpiamos primero el combobox de los items de la conexion anterior
 
 
 
-            using (MySqlConnection conexion = bd.ObtenerConexion())
+            using (MySqlConnection cn = conexion.ObtenerConexion())
             {
-                conexion.Open();
+                cn.Open();
 
                 MySqlCommand comandoCalificaciones = new MySqlCommand(
+                    "Select distinct calificacion from libros order by calificacion asc", cn
+                );
 
-                  "Select distinct calificacion from libros order by calificacion asc", conexion //seleciona las calificaciones distintas del campo y las ordena de menor a mayor
-                    );
-
-                using (MySqlDataReader calificacion = comandoCalificaciones.ExecuteReader()) //Guardo en una variable lo leido
+                using (MySqlDataReader calificacion = comandoCalificaciones.ExecuteReader())
                 {
                     while (calificacion.Read())
                     {
                         cb_estre.Items.Add(calificacion["calificacion"].ToString());
                     }
-
                 }
 
                 MySqlCommand comandoAutores = new MySqlCommand(
+                    "Select distinct nombre from autores order by nombre", cn
+                );
 
-                "Select distinct nombre from autores order by nombre", conexion //seleciona los nombres distintos del campo y las ordena en orden alfabetico
-                  );
-
-                using (MySqlDataReader autores = comandoAutores.ExecuteReader()) //Guardo en una variable lo leido
+                using (MySqlDataReader autores = comandoAutores.ExecuteReader())
                 {
                     while (autores.Read())
                     {
                         cb_autor.Items.Add(autores["nombre"].ToString());
                     }
-
                 }
 
-                conexion.Close();
-
+                cn.Close();
             }
+            //LLAMO A LA CLASE QUE CARGA LOS LIBROS
+            //primero este donde se guardan los datos
+            DataTable resultado = MostrarLibros.ConsultaLibros();
+            MostrarLibros.CrearLibros(resultado, FlbBiblioteca!); //le puse ese ! porque si no me dice que no acepta nulos y se supone es para que sepa que no es nulo
         }
 
- 
+
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -97,7 +99,7 @@ namespace Biblioteca
         {
 
         }
-
+        #region botones
         private void btnagg_Click_1(object sender, EventArgs e)
         {
             AddLibro1 agregar_libros = new AddLibro1();
@@ -136,6 +138,11 @@ namespace Biblioteca
 
             longin.Show();
             this.Hide();
+        }
+#endregion
+        private void FlbBiblioteca_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

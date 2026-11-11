@@ -1,3 +1,5 @@
+using System.Security.Cryptography.X509Certificates;
+
 namespace pantalla_inicio
 {
     internal static class Program
@@ -13,18 +15,10 @@ namespace pantalla_inicio
             ApplicationConfiguration.Initialize();
 
 
-
-
-            //aqui creo la base de datos
-
-            var conexion = new conexion();
+            //CREO LA BASE DE DATOS SI NO EXISTE
             conexion.CrearBaseSiNoExiste();
-            Application.Run(new Inicio());
-
-            //aqui voy a crear la carpeta portadas_libros en el bin llamando a el metodo de la clase imagenes   
-
-            var carpeta = new crear_carpeta();
-            carpeta.CrearCarpetaSiNoExiste();
+            //CREO LA CARPETA PARA GUARDAR LAS PORTADAS DE LOS LIBROS
+            crear_carpeta.CrearCarpetaSiNoExiste();
 
 
 

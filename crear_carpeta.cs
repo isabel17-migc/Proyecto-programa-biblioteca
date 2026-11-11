@@ -6,16 +6,16 @@ using System.IO;
 
 namespace pantalla_inicio
 {
-    internal class crear_carpeta
+    public class crear_carpeta
     {
         //propiedades 
-        public string NombreCarpeta { get; set; } = "portadas_libros";
+        public static string NombreCarpeta { get; set; } = "portadas_libros";
         //devuelve la ruta del bin
-        public string Rutabin { get; set; } = AppDomain.CurrentDomain.BaseDirectory;
+        public static string Rutabin { get; set; } = AppDomain.CurrentDomain.BaseDirectory;
         //devuelve la ruta completa de la carpeta portadas_libros
-        public string RutaCarpeta => System.IO.Path.Combine(Rutabin, NombreCarpeta);
+        public static string RutaCarpeta => System.IO.Path.Combine(Rutabin, NombreCarpeta);
 
-        public void CrearCarpetaSiNoExiste()
+        public static void CrearCarpetaSiNoExiste()
         {
             //verifica si la carpeta no existe
             if (!System.IO.Directory.Exists(RutaCarpeta))
@@ -25,7 +25,7 @@ namespace pantalla_inicio
             }
         } 
 
-    public string GuardarImagenEnCarpeta(string rutaCarpeta, string Titulo, string rutaImagenSeleccionada)
+    public  static string GuardarImagenEnCarpeta(string rutaCarpeta, string Titulo, string rutaImagenSeleccionada)
         {
             if (string.IsNullOrWhiteSpace(rutaImagenSeleccionada) || !File.Exists(rutaImagenSeleccionada))
             {
@@ -55,7 +55,7 @@ namespace pantalla_inicio
         
 
             //propiedades
-            string nombrePortada = TituloRevisado + "_portada" + extension; // Obtiene el nombre del libro desde la variable esa
+            string nombrePortada = TituloRevisado + "_portada" + extension; // Obtiene el nombre del libro desde la variable esta
 
             // Obtiene la ruta completa donde se va a guardar la imagen 
             string rutaPortada = Path.Combine(rutaCarpeta, nombrePortada); 

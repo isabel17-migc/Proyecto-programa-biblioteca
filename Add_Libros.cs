@@ -11,8 +11,7 @@ namespace Apartado_de_Libros_proyecto_progra_III
 {
     public partial class AddLibro1 : Form
     {
-        //Creo el objeto para la conexion
-        conexion bd = new conexion();
+     
 
         // Variable para recordar la ruta de la imagen seleccionada por el usuario
         public string rutaImagenSeleccionada = "";
@@ -61,12 +60,12 @@ namespace Apartado_de_Libros_proyecto_progra_III
                 }
 
                 // guardarlo en la base de datos
-                using (MySqlConnection conexion = bd.ObtenerConexion())
+                using (MySqlConnection cn = conexion.ObtenerConexion()) 
                 {
-                    conexion.Open();
-
+                    cn.Open();
+                  
                     // Insertar el autor
-                    MySqlCommand comandoInsert = new MySqlCommand("INSERT INTO autores(nombre) VALUES(@nombre);", conexion);
+                    MySqlCommand comandoInsert = new MySqlCommand("INSERT INTO autores(nombre) VALUES(@nombre);", cn);
                     comandoInsert.Parameters.AddWithValue("@nombre", nombreAutor);
                     comandoInsert.ExecuteNonQuery();
                 }
@@ -98,7 +97,7 @@ namespace Apartado_de_Libros_proyecto_progra_III
                     // Cargar la imagen en el PictureBox especificado
                     ImagenLibroPictureBox.Image = Image.FromFile(openFileDialog.FileName);
 
-                    // Ajustar el tamaño para que la portada no se deforme
+                                        // Ajustar el tamaño para que la portada no se deforme
                     ImagenLibroPictureBox.SizeMode = PictureBoxSizeMode.Zoom;
                 }
             }
@@ -161,20 +160,20 @@ namespace Apartado_de_Libros_proyecto_progra_III
 
 
                 //hago que la imagen se guarde en la carpeta portadas libros llamando al metodo guardarimgen 
-                var guardar = new crear_carpeta();
-                guardar.CrearCarpetaSiNoExiste();
-                // llamo al metodo de mi clase que guarda la imagen en la carpeta portadas_libros y me devuelve la ruta de la imagen guardada
-                string rutaPortada = guardar.GuardarImagenEnCarpeta(guardar.RutaCarpeta, Titulo, rutaImagenSeleccionada);
+                crear_carpeta.CrearCarpetaSiNoExiste();
+                string rutaPortada = crear_carpeta.GuardarImagenEnCarpeta(crear_carpeta.RutaCarpeta, Titulo, rutaImagenSeleccionada);
+
+               
 
 
                 //creo la conexion 
-                using (MySqlConnection conexion = bd.ObtenerConexion())
+                using (MySqlConnection cn = conexion.ObtenerConexion())
                 {
                     //abro la conexión
-                    conexion.Open();
+                    cn.Open();
 
                     //mando el comando que va a insertar todos los datos en 
-                    MySqlCommand comando = new MySqlCommand("INSERT INTO libros(id_autor, titulo, portada) VALUES(@id_autor, @titulo, @portada);", conexion);
+                    MySqlCommand comando = new MySqlCommand("INSERT INTO libros(id_autor, titulo, portada) VALUES(@id_autor, @titulo, @portada);", cn);
                     //parametros (faltan los demas solo puse los necesarios para comprobar que si funcione lo que hize)
 
                     comando.Parameters.AddWithValue("@id_autor", idAutor);
@@ -185,7 +184,7 @@ namespace Apartado_de_Libros_proyecto_progra_III
                     comando.ExecuteNonQuery();
 
                     // cierro la conexión
-                    conexion.Close();
+                    cn.Close();
                 }
 
 
@@ -257,14 +256,14 @@ namespace Apartado_de_Libros_proyecto_progra_III
         //este metodo llena el combox
         private void CargarAutores()
         {
-            using (MySqlConnection conexion = bd.ObtenerConexion())
+            using (MySqlConnection cn = conexion.ObtenerConexion())
             {
                 try
                 {
-                    conexion.Open();
+                    cn.Open();
                     string query = "SELECT id_autor, nombre FROM autores;";
 
-                    using (MySqlCommand comando = new MySqlCommand(query, conexion))
+                    using (MySqlCommand comando = new MySqlCommand(query, cn))
                     {
                         using (MySqlDataReader lector = comando.ExecuteReader())
                         {
