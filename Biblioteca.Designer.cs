@@ -40,8 +40,10 @@
             cb_autor = new ComboBox();
             FlbBiblioteca = new FlowLayoutPanel();
             fileSystemWatcher1 = new FileSystemWatcher();
+            fileSystemWatcher2 = new FileSystemWatcher();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)fileSystemWatcher1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)fileSystemWatcher2).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -174,6 +176,12 @@
             fileSystemWatcher1.EnableRaisingEvents = true;
             fileSystemWatcher1.SynchronizingObject = this;
             // 
+            // fileSystemWatcher2
+            // 
+            fileSystemWatcher2.EnableRaisingEvents = true;
+            fileSystemWatcher2.SynchronizingObject = this;
+            fileSystemWatcher2.Changed += fileSystemWatcher2_Changed;
+            // 
             // Biblioteca1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -194,6 +202,7 @@
             Load += Biblioteca1_Load;
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)fileSystemWatcher1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)fileSystemWatcher2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -211,5 +220,6 @@
         private Button btnagg;
         private FlowLayoutPanel FlbBiblioteca;
         private FileSystemWatcher fileSystemWatcher1;
+        private FileSystemWatcher fileSystemWatcher2;
     }
 }

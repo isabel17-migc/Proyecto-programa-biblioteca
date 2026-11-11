@@ -49,7 +49,7 @@ namespace pantalla_inicio
         }
 #endregion
 
-        //ESTE METODO AHORA VA A CARGAR LOS DATOS
+       
 
 
 

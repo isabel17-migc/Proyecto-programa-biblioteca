@@ -77,7 +77,7 @@ namespace pantalla_inicio
 
         //1-INSERT, SELECT, UPDATE, DELETE
         //estem tiene de parametro la variable "comandosql" se tiene que crear cada que se usa el metodo cualquiera de los tres metodos
-        public static void Ejecutar(string comandosql)
+        public static void Ejecutar(string comandosql, MySqlParameter[] parametros = null) //le agregue el ultimo parametro para que reciba listas de parametros opcional
         {
             using (MySqlConnection conexion = ObtenerConexion())
             {
@@ -86,13 +86,19 @@ namespace pantalla_inicio
 
                 MySqlCommand comando = new MySqlCommand(comandosql, conexion);
 
+                //pongo este que mete los parametros si los hay
+                if(parametros != null)
+                {
+                    comando.Parameters.AddRange(parametros);
+                }
+
                 //el metodo que lo ejecuta
                 comando.ExecuteNonQuery();
             }
         }
 
         //2-READ
-        public static DataTable Leer(string comandosql)
+        public static DataTable Leer(string comandosql, MySqlParameter[] parametros = null)
         {
             using (MySqlConnection conexion = ObtenerConexion())
             {
@@ -101,7 +107,13 @@ namespace pantalla_inicio
 
                 //pongo el comando
                 MySqlCommand comando = new MySqlCommand(comandosql, conexion);
-              
+               
+                
+                if (parametros != null)
+                {
+                   
+                    comando.Parameters.AddRange(parametros);
+                }
 
                 //aqui voy a poner la tabla que guarda el resultado o mas bien inicializarla
                 DataTable tablaResultado = new DataTable();
@@ -119,7 +131,7 @@ namespace pantalla_inicio
         }
 
         //3- devuelve de que nomas la primera columna de el registro sirve para comprobar cosas como si existe un registro o no, o si hay un registro con ese nombre de usuario y contraseña
-        public static int Leer2(string comandosql)
+        public static int Leer2(string comandosql, MySqlParameter[] parametros = null)
         {
             using (MySqlConnection conexion = ObtenerConexion())
             {
@@ -127,8 +139,12 @@ namespace pantalla_inicio
                 conexion.Open();
 
                 MySqlCommand comando = new MySqlCommand(comandosql, conexion);
-                
 
+                if (parametros != null)
+                {
+                    
+                    comando.Parameters.AddRange(parametros);
+                }
                 //el metodo que lo ejecuta
                 int resultado = Convert.ToInt32(comando.ExecuteScalar());
                 //el resultado se guarda en esta variable

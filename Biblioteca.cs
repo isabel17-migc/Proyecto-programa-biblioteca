@@ -10,7 +10,7 @@ namespace Biblioteca
     public partial class Biblioteca1 : Form
     {
 
-      
+
 
 
         public Biblioteca1()
@@ -40,7 +40,7 @@ namespace Biblioteca
 
         private void Biblioteca1_Load(object sender, EventArgs e)
         {
-           
+
 
             cb_estre.Items.Clear(); //Limpiamos primero el combobox de los items de la conexion anterior
             cb_autor.Items.Clear(); //Limpiamos primero el combobox de los items de la conexion anterior
@@ -80,7 +80,7 @@ namespace Biblioteca
             //LLAMO A LA CLASE QUE CARGA LOS LIBROS
             //primero este donde se guardan los datos
             DataTable resultado = MostrarLibros.ConsultaLibros();
-            MostrarLibros.CrearLibros(resultado, FlbBiblioteca!); //le puse ese ! porque si no me dice que no acepta nulos y se supone es para que sepa que no es nulo
+            MostrarLibros.CrearLibros(resultado, FlbBiblioteca!); //le puse ese ! porque si no me dice que no acepta nulos y se supone es para que sepa que no es nulo o que no le voy a mandar nulos
         }
 
 
@@ -139,8 +139,13 @@ namespace Biblioteca
             longin.Show();
             this.Hide();
         }
-#endregion
+        #endregion
         private void FlbBiblioteca_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void fileSystemWatcher2_Changed(object sender, FileSystemEventArgs e)
         {
 
         }
