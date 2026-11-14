@@ -4,7 +4,9 @@ using Mysqlx.Crud;
 using pantalla_inicio;
 using System.Data;
 using System.IO;
+using System.Web;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 
 namespace Apartado_de_Libros_proyecto_progra_III
@@ -13,11 +15,18 @@ namespace Apartado_de_Libros_proyecto_progra_III
     {
      
 
-        // Variable para recordar la ruta de la imagen seleccionada por el usuario
+        // Variables que voy a necesitar 
         public string rutaImagenSeleccionada = "";
+        public string reseña = "";
+        public int estrellasLlenas = 0;
+        string Titulo = "";
+        DateTime FechaInicio;
+        DateTime FechaFin;
+        public int Paginas = 0 ;
+        public int IdAutor = 0;
 
         // Propiedad pública que devolverá el libro registrado a la ventana principal
-        public Libro NuevoLibro { get; private set; }
+
         public AddLibro1()
         {
             InitializeComponent();
@@ -30,6 +39,7 @@ namespace Apartado_de_Libros_proyecto_progra_III
         {
             CargarAutores(); //llamo al metodo que carga los autores al abrir el formulario
             ActualizarEstrellas();
+            CargarGeneros();
 
         }
 
@@ -42,34 +52,40 @@ namespace Apartado_de_Libros_proyecto_progra_III
         {
 
         }
-
+        
         private void RegistrarAutorTextBox_KeyDown(object sender, KeyEventArgs e) //le cambie al keydawn aqui en en el designer para que detecte las teclas que el usuario presiona
         {
-
+            string Autor = "";
             //CODIGO ESTE PARA QUE SE INSERTEN LOS AUTORES EN LA BASE DE DATOS
             // Validar si la tecla presionada es ENTER
             if (e.KeyCode == Keys.Enter)
             {
-                string nombreAutor = RegistrarAutorTextBox.Text; //creela variable esta que sirve para guardar el nombre de el autor
+                //verifico que no este vacio y lo guardo
+                if (!string.IsNullOrEmpty(RegistrarAutorTextBox.Text)) {
+                    Autor = RegistrarAutorTextBox.Text.Trim();
 
-                // Validar que el campo no esté vacío
-                if (string.IsNullOrWhiteSpace(nombreAutor))
-                {
-                    MessageBox.Show("Por favor, ingresa el nombre de un autor.");
-                    return;
+                    try
+                    {
+                        //el comando
+                        string comando = @"INSERT INTO autores(id_usuario, nombre) VALUES (@usuario, @autor)";
+                        //creo los parametros
+                        MySqlParameter[] Parametros = new MySqlParameter[]
+                        {
+                    new MySqlParameter("@usuario", MostrarLibros.UsuarioActual),
+                    new MySqlParameter("@autor", Autor)
+
+                        };
+                        //metodo
+                        conexion.Ejecutar(comando, Parametros);
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Error al guardar el autor");
+                    }
+
                 }
-
-                // guardarlo en la base de datos
-                using (MySqlConnection cn = conexion.ObtenerConexion()) 
-                {
-                    cn.Open();
-                  
-                    // Insertar el autor
-                    MySqlCommand comandoInsert = new MySqlCommand("INSERT INTO autores(nombre) VALUES(@nombre);", cn);
-                    comandoInsert.Parameters.AddWithValue("@nombre", nombreAutor);
-                    comandoInsert.ExecuteNonQuery();
-                }
-
+                
+              
                 //llamo la funcion que vuelve a cargar los datos en el combobox
                 CargarAutores();
             }
@@ -80,7 +96,7 @@ namespace Apartado_de_Libros_proyecto_progra_III
 
 
 
-
+        #region este metodo pone la imagen de el libro y guarda la ruta
         private void SubirImagenLibroBoton_Click(object sender, EventArgs e)
         {
             // Crear la ventana de diálogo para seleccionar archivos
@@ -102,6 +118,7 @@ namespace Apartado_de_Libros_proyecto_progra_III
                 }
             }
         }
+        #endregion
 
         private void numCalificacion_ValueChanged(object sender, EventArgs e)
         {
@@ -112,94 +129,113 @@ namespace Apartado_de_Libros_proyecto_progra_III
         private void Form1_Load(object sender, EventArgs e)
         {
             ActualizarEstrellas(); // Muestra las estrellas iniciales al abrir la ventana
+            
         }
+
+        #region el metodo que muestra las estrellas  y las guarda en la variable estrellas llenas
 
         // Método auxiliar para dibujar las estrellas
         private void ActualizarEstrellas()
         {
-            int estrellasLlenas = (int)numUpDownCalificacionEstrellas.Value;
+            estrellasLlenas = (int)numUpDownCalificacionEstrellas.Value;
             int estrellasVacias = 5 - estrellasLlenas;
 
             // Crea el texto combinando estrellas llenas (★) y vacías (☆)
             lblEstrellas.Text = new string('★', estrellasLlenas) + new string('☆', estrellasVacias);
         }
 
+        #endregion
+
+
+        #region este metodo guarda la informacion de el libro en la base de datos
         private void GuardarInformacionLibroBoton_Click(object sender, EventArgs e)
         {
-
-            NuevoLibro = new Libro(); // Crear el objeto
-            //les asigno datos a las propiedades del objeto libro que cree en la clase libro
-            NuevoLibro.Titulo = NombrarLibroTextBox.Text;
-            NuevoLibro.Calificacion = (int)numUpDownCalificacionEstrellas.Value;
-            NuevoLibro.FechaInicio = FechaInicioDateTimePicker.Value;
-            NuevoLibro.FechaFin = FechaDeFinalizacionDateTimePicker.Value;
-            NuevoLibro.Comentario = ComentarioTextBox.Text;
-            NuevoLibro.NumeroPaginas = (int)NumeroPaginasNumericUpDown.Value;
-            //creo las variables para guardar los datos del libro en la base de datos (son las qufaltan cree las variables pero no las inserte)
-            string Titulo = NuevoLibro.Titulo;
-            int calificacion = NuevoLibro.Calificacion;
-            DateTime fechaInicio = NuevoLibro.FechaInicio;
-            DateTime fechaFin = NuevoLibro.FechaFin;
-            var comentario = NuevoLibro.Comentario;
-            int numeroPaginas = NuevoLibro.NumeroPaginas;
-
+            //le asigno valor a las variables que faltan
+           Titulo = NombrarLibroTextBox.Text;
+           FechaInicio = FechaInicioDateTimePicker.Value;
+           FechaFin = FechaDeFinalizacionDateTimePicker.Value;
+           Paginas = (int)NumeroPaginasNumericUpDown.Value;
+           IdAutor = Convert.ToInt32(SeleccionarAutorComboBox.SelectedValue);
+           int Genero = Convert.ToInt32(GeneroLiterarioComboBox.SelectedValue);
 
 
             // Verificar que el autor serleccionado en el combobox sea valido
-            if (SeleccionarAutorComboBox.SelectedValue != null)
+            if (IdAutor != 0)
             {
-
-                // Obtenemos el ID del autor seleccionado (ValueMember)
-                int idAutor = Convert.ToInt32(SeleccionarAutorComboBox.SelectedValue);
-
-                // Obtenemos el Nombre del autor seleccionado (DisplayMember)
-                string nombreAutor = SeleccionarAutorComboBox.Text;
-
-
-
-
-
                 //hago que la imagen se guarde en la carpeta portadas libros llamando al metodo guardarimgen 
                 crear_carpeta.CrearCarpetaSiNoExiste();
                 string rutaPortada = crear_carpeta.GuardarImagenEnCarpeta(crear_carpeta.RutaCarpeta, Titulo, rutaImagenSeleccionada);
 
-               
 
 
-                //creo la conexion 
-                using (MySqlConnection cn = conexion.ObtenerConexion())
+                #region esta parte guarda los datos de el libro y el genero
+                //CONEXION
+                //comandos
+                string comando = @"INSERT INTO libros(id_usuario, id_autor, titulo, fecha_inicio, fecha_fin, calificacion, reseña, portada, paginas) VALUES(@usuario, @autor, @titulo, @fechainicio, @fechafin, @calificacion, @reseña, @ruta, @paginas)";
+                //arreglo de parametros
+                MySqlParameter[] Parametros = new MySqlParameter[]
                 {
-                    //abro la conexión
-                    cn.Open();
+                new MySqlParameter("@usuario", MostrarLibros.UsuarioActual),
+                new MySqlParameter("@autor", IdAutor ),
+                new MySqlParameter("@titulo", Titulo),
+                new MySqlParameter("@fechainicio", FechaInicio),
+                new MySqlParameter("@fechafin", FechaFin),
+                new MySqlParameter("@calificacion", estrellasLlenas),
+                new MySqlParameter("@reseña", reseña),
+                new MySqlParameter("@ruta", rutaPortada),
+                new MySqlParameter("@paginas", Paginas)
+                };
+                //lamo a el metodo
+                try
+                {
+                    conexion.Ejecutar(comando, Parametros);
+                    MessageBox.Show("Libro guardado correctamente!");
+                    Dashboard1 dashboard = new Dashboard1();
 
-                    //mando el comando que va a insertar todos los datos en 
-                    MySqlCommand comando = new MySqlCommand("INSERT INTO libros(id_autor, titulo, portada) VALUES(@id_autor, @titulo, @portada);", cn);
-                    //parametros (faltan los demas solo puse los necesarios para comprobar que si funcione lo que hize)
+                    dashboard.FormClosed += (s, args) => Application.Exit();
 
-                    comando.Parameters.AddWithValue("@id_autor", idAutor);
-                    comando.Parameters.AddWithValue("@titulo", Titulo);
-                    comando.Parameters.AddWithValue("@portada", rutaPortada);
-
-                    //ejecuta el comando
-                    comando.ExecuteNonQuery();
-
-                    // cierro la conexión
-                    cn.Close();
+                    dashboard.Show();
+                    this.Hide();
                 }
+                catch (MySqlException sqlEx)
+                {
+                    MessageBox.Show(
+                    $"Error SQL #{sqlEx.Number}: {sqlEx.Message}",
+                    "Error de Base de Datos",
+                    MessageBoxButtons.OK,
+                     MessageBoxIcon.Error
+                     );
+                }
+                //ahora voy a consultar el id generado de el libro y guardar el genero
+               
+                //consulta 1 para saber el id de el libro
+                string comando1 = @"SELECT id_libro FROM libros WHERE titulo = @titulo AND id_usuario = @usuarioactual  ";
+                MySqlParameter[] parametros1 = new MySqlParameter[] {
+                new MySqlParameter("@titulo", Titulo),
+                new MySqlParameter("@usuarioactual", MostrarLibros.UsuarioActual)
+                };
+                int IdLibro = conexion.Leer2(comando1, parametros1);
+                //consulta 2
+                string comando2 = @"INSERT INTO genero_libro (id_libro, id_genero) VALUES (@idlibro, @idgenero)";
+                MySqlParameter[] parametros2 = new MySqlParameter[]
+                {
+                    new MySqlParameter("@idlibro", IdLibro ),
+                    new MySqlParameter("@idgenero", Convert.ToInt32(GeneroLiterarioComboBox.SelectedValue))
+                };
+                conexion.Ejecutar(comando2, parametros2);
 
 
 
 
-
-
-                Dashboard1 dashboard = new Dashboard1();
-
-                dashboard.FormClosed += (s, args) => Application.Exit();
-
-                dashboard.Show();
-                this.Hide();
             }
+                #endregion
         }
+
+        #endregion
+
+
+
+        #region el evento de el comentario
 
         private void ComentarioTextBox_KeyDown(object sender, KeyEventArgs e)
         {
@@ -210,15 +246,14 @@ namespace Apartado_de_Libros_proyecto_progra_III
                 e.SuppressKeyPress = true;
 
                 // Captura el texto ingresado quitando espacios en blanco innecesarios
-                string comentarioIngresado = ComentarioTextBox.Text.Trim();
+                reseña = ComentarioTextBox.Text.Trim();
 
-                if (!string.IsNullOrEmpty(comentarioIngresado))
+                if (!string.IsNullOrEmpty(reseña))
                 {
-                    // Opcional: Notifica al usuario o guarda la información
-                    MessageBox.Show("Comentario guardado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    // Si deseas limpiar el campo después de dar Enter, descomenta la siguiente línea:
-                    // ComentarioTextBox.Clear();
+                   
+                    MessageBox.Show("Guardaste el comentario, ahora guarda el libro", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    
+                    
                 }
                 else
                 {
@@ -226,6 +261,9 @@ namespace Apartado_de_Libros_proyecto_progra_III
                 }
             }
         }
+
+        #endregion
+        #region un monton de eventos sin nada
 
         private void SeleccionarAutorComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -253,7 +291,9 @@ namespace Apartado_de_Libros_proyecto_progra_III
 
         }
 
-        //este metodo llena el combox
+        #endregion
+      
+        #region Metodo cargar autores
         private void CargarAutores()
         {
             using (MySqlConnection cn = conexion.ObtenerConexion())
@@ -261,10 +301,16 @@ namespace Apartado_de_Libros_proyecto_progra_III
                 try
                 {
                     cn.Open();
-                    string query = "SELECT id_autor, nombre FROM autores;";
+                    string cm = "SELECT id_autor, nombre FROM autores WHERE id_usuario = @usuarioactual;";
 
-                    using (MySqlCommand comando = new MySqlCommand(query, cn))
+
+                    using (MySqlCommand comando = new MySqlCommand(cm, cn))
                     {
+                        comando.Parameters.AddWithValue(
+                        "@usuarioactual",
+                         MostrarLibros.UsuarioActual);
+
+
                         using (MySqlDataReader lector = comando.ExecuteReader())
                         {
                             DataTable dt = new DataTable();
@@ -283,24 +329,42 @@ namespace Apartado_de_Libros_proyecto_progra_III
                 }
             }
         }
+        #endregion
+
+        #region Metodo cargar generos
+        public void CargarGeneros()
+        {
+            try
+            {
+                //hago la consulta que lee todos los generos
+                string comando = @"SELECT * FROM genero";
+                //llamo al metodo
+                DataTable generos = conexion.Leer(comando);
+                //ahora muestro los generos en el combobox
+                GeneroLiterarioComboBox.DataSource = generos;
+                GeneroLiterarioComboBox.DisplayMember = "genero";
+                GeneroLiterarioComboBox.ValueMember = "id_genero";
+            }
+            catch(MySqlException ex)
+            {
+                MessageBox.Show(
+                    $"Error SQL #{ex.Number}: {ex.Message}",
+                    "Error al mostrar los generos",
+                    MessageBoxButtons.OK,
+                     MessageBoxIcon.Error
+                     );
+            }
+
+
+        }
+        #endregion
 
         private void RegistrarAutorTextBox_TextChanged(object sender, EventArgs e)
         {
 
         }
     }
-    public class Libro
-    {
-        public string Titulo { get; set; }
-        public string Autor { get; set; }
-        public int Calificacion { get; set; }
-        public DateTime FechaInicio { get; set; }
-        public DateTime FechaFin { get; set; }
-        public string Comentario { get; set; }
-        public string Genero { get; set; }
-        public int NumeroPaginas { get; set; }
-        //borre ruta imagen porque no se usa, se usa una varible temporal y luego el metodo la guarda en la carpeta portadas_libros y luego se guarda en la base de datos
-    }
+        
 
 
 

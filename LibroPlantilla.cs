@@ -11,21 +11,23 @@ namespace pantalla_inicio
 {
     public partial class LibroPlantilla : UserControl
     {
-      
+
         public LibroPlantilla()
         {
             InitializeComponent();
         }
 
         //VOY A PONER LAS PROPIEDADES QUE NECESITO PARA ESTA CLASE, Y SON ESTE LA RUTA Y EL TITULO
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] //ahorita lo explico
-        public  string Ruta { get; set; } = "";  //segun que no se tenian que inicializar cuando se declaraban en una clase o algo asi, pero si no lo hago me da error, asi que lo inicializo a vacio
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] //pongo esto para editar la configuraciones de serializacion era mas facil hacerlo private perpo me da flojera
+        public string Ruta { get; set; } = "";  //segun que no se tenian que inicializar cuando se declaraban en una clase o algo asi, pero si no lo hago me da error, asi que lo inicializo a vacio
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Titulo { get; set; } = "";
 
+        //El evento click de este control 
+
         #region Metodo que llena los controles de la plantilla con los datos del libro
         //VOY A PONER AQUI EL METODO PARA QUE EL CONTROL SE LLENE SOLITO
-        public  void CargarDatos(string RutaImagen, string TituloLibro) //pongo en los parametros los valores que le voy a dar despues
+        public void CargarDatos(string RutaImagen, string TituloLibro) //pongo en los parametros los valores que le voy a dar despues
         {
             //leo los valores 
             this.Ruta = RutaImagen;
@@ -34,7 +36,7 @@ namespace pantalla_inicio
             //muestro los datos
             LblTitulo.Text = TituloLibro;
 
-            //para la imagen
+            //para la imagen primero reviso que exista
             if (File.Exists(RutaImagen))
             {
                 using (var stream = new FileStream(RutaImagen, FileMode.Open, FileAccess.Read))
@@ -46,7 +48,7 @@ namespace pantalla_inicio
                     PicPortada.SizeMode = PictureBoxSizeMode.Zoom;
                 }
             }
-            else 
+            else
             {
                 PicPortada.Image = null;
             }
@@ -57,5 +59,10 @@ namespace pantalla_inicio
         #endregion
 
 
+        private void LibroPlantilla_click(object sender, EventArgs e)
+        {
+
+
+        }
     }
 }

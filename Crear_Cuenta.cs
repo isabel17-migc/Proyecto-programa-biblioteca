@@ -1,3 +1,4 @@
+using dassh_board;
 using MySql.Data.MySqlClient; //importo biblioteca
 using pantalla_loig_in;
 using static System.Runtime.InteropServices.JavaScript.JSType;
@@ -7,8 +8,7 @@ namespace pantalla_inicio
     public partial class Crear_Cuenta1 : Form
 
     {
-        //creo un objeto de la clase conexion se crea una vez por formulario
-        conexion bd = new conexion();
+        
 
         public Crear_Cuenta1()
         {
@@ -55,28 +55,59 @@ namespace pantalla_inicio
                 return;
             }
 
+            //AQUI SE VA A GUARDAR LA CONTRASEÑA SI NO EXISTE no se si sea la forma correcta usar tantos if pero funciona sjsjs
 
-
-            // creo la conexión llamando al método de mi clase
-            using (MySqlConnection cn = conexion.ObtenerConexion())
+            if (nusuario != "" & contraseña != "")
             {
-                // abro la conexión
-                cn.Open();
+                //creo el arreglo de los parametros
+                MySqlParameter[] Parametros = new MySqlParameter[]
+                {
+                   new MySqlParameter("@nusuario", nusuario),
+                   new MySqlParameter("@contrasena", contraseña)
+                };
+                //creo el comando
+                string comando = @"SELECT id_usuario FROM usuario WHERE nombre_usuario = @nusuario";
+                //llamo a mi metodo
+                int resultado = conexion.Leer2(comando, Parametros);
+                if(resultado == 0) 
+                {
+                    //ahora si voy a guardar el usuario y la contraseña
+                    //creo el comando
+                    string comando2 = @"INSERT INTO usuario(nombre_usuario, contraseña) VALUES (@nusuario, @contrasena)";
+                    //llamo a la funcion y pongo un try catch por si falla
+                    try
+                    {
+                        conexion.Ejecutar(comando2, Parametros);
+                        //si funciona lo dice
+                        MessageBox.Show("Usuario creado correctamente");
+                        //y lo lleva automaticamente a la pantalla principal
+                        MessageBox.Show("Sesión iniciada automaticamente");
 
-                // pongo el ese comando
-                MySqlCommand comando = new MySqlCommand(
-                    "INSERT INTO usuario (nombre_usuario, contraseña) VALUES (@nombre, @contraseña)", cn);
-                comando.Parameters.AddWithValue("@nombre", nusuario);
-                comando.Parameters.AddWithValue("@contraseña", contraseña);
+                        //hago otra consulta que saca el id de el usuario
+                        string comando3 = @"SELECT id_usuario FROM usuario WHERE nombre_usuario = @nusuario AND contraseña = @contraseña";
 
-                // aqui se inserta
-                comando.ExecuteNonQuery();
+                        MostrarLibros.UsuarioActual = conexion.Leer2(comando3, Parametros);
 
-                // cierro la conexión
-                cn.Close();
+                        Dashboard1 dashboard = new Dashboard1();
+
+                        dashboard.FormClosed += (s, args) => Application.Exit();
+
+                        dashboard.Show();
+                        this.Hide();
+                    }
+                    catch
+                    {
+                        MessageBox.Show("No se pudo guardar el usuario, intenta otra vez");
+                    }
+
+
+                }
+                else
+                {
+                    MessageBox.Show("Usuario ya existente");
+                }
             }
-
-            MessageBox.Show("Usuario guardado.");
+            
 
 
         }

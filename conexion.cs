@@ -87,13 +87,15 @@ namespace pantalla_inicio
                 MySqlCommand comando = new MySqlCommand(comandosql, conexion);
 
                 //pongo este que mete los parametros si los hay
-                if(parametros != null)
+                if (parametros != null)
                 {
                     comando.Parameters.AddRange(parametros);
                 }
 
                 //el metodo que lo ejecuta
                 comando.ExecuteNonQuery();
+
+
             }
         }
 
@@ -145,7 +147,8 @@ namespace pantalla_inicio
                     
                     comando.Parameters.AddRange(parametros);
                 }
-                //el metodo que lo ejecuta
+               
+              
                 int resultado = Convert.ToInt32(comando.ExecuteScalar());
                 //el resultado se guarda en esta variable
 

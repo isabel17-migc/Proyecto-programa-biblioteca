@@ -60,6 +60,7 @@
             Controls.Add(LblTitulo);
             Name = "LibroPlantilla";
             Size = new Size(105, 166);
+            Click += LibroPlantilla_click;
             ((System.ComponentModel.ISupportInitialize)PicPortada).EndInit();
             ResumeLayout(false);
             PerformLayout();
