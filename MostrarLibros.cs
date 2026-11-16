@@ -15,7 +15,7 @@ namespace pantalla_inicio
         
        
       
-        public static string ConsultaSql = @"SELECT portada , titulo FROM libros WHERE id_usuario= @usuarioactual"; //esta es la consulta que va a realizar segun yo aqui lee solo esas dos columnas pero de todos los libros es siempre igual, segun yo si se pone afuera
+        public static string ConsultaSql = @"SELECT id_libro, portada , titulo FROM libros WHERE id_usuario= @usuarioactual"; //esta es la consulta que va a realizar segun yo aqui lee solo esas dos columnas pero de todos los libros es siempre igual, segun yo si se pone afuera
        
       
 
@@ -43,19 +43,25 @@ namespace pantalla_inicio
             foreach (DataRow fila in resultado.Rows) // pongo aqui que se va a hacer esto por cada datarow  osea fila en la tabla de los resultados
             {
                 //leo los valores de el datatable
+                int IdLibro = Convert.ToInt32(fila["id_libro"]);
                 string RutaImagen = Convert.ToString(fila["portada"]);
                 string TituloLibro = Convert.ToString(fila["titulo"]);
+                
                 //creo el objetooo
                 LibroPlantilla libro = new LibroPlantilla();
                 //con este metodo se llena el objeto
-                libro.CargarDatos(RutaImagen, TituloLibro);
+                libro.CargarDatos(IdLibro, RutaImagen, TituloLibro);
+
+                //guardo el id de el libro
+                libro.Tag = IdLibro;
+
                 //y por ultimo lo agrego al esete
                 FlbBiblioteca.Controls.Add(libro);
 
 
             }
 
-
+            
 
 
         }

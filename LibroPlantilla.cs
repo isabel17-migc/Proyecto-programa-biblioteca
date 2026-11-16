@@ -15,6 +15,8 @@ namespace pantalla_inicio
         public LibroPlantilla()
         {
             InitializeComponent();
+            PicPortada.Click += LibroPlantilla_click;
+            LblTitulo.Click += LibroPlantilla_click; //estos son para que al hacer clicj en el label o imagen igual pase el evento
         }
 
         //VOY A PONER LAS PROPIEDADES QUE NECESITO PARA ESTA CLASE, Y SON ESTE LA RUTA Y EL TITULO
@@ -22,17 +24,21 @@ namespace pantalla_inicio
         public string Ruta { get; set; } = "";  //segun que no se tenian que inicializar cuando se declaraban en una clase o algo asi, pero si no lo hago me da error, asi que lo inicializo a vacio
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Titulo { get; set; } = "";
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public int id { get; set; } = 0;
 
-        //El evento click de este control 
 
         #region Metodo que llena los controles de la plantilla con los datos del libro
         //VOY A PONER AQUI EL METODO PARA QUE EL CONTROL SE LLENE SOLITO
-        public void CargarDatos(string RutaImagen, string TituloLibro) //pongo en los parametros los valores que le voy a dar despues
+        public void CargarDatos(int IdLibro, string RutaImagen, string TituloLibro) //pongo en los parametros los valores que le voy a dar despues
         {
+            //LLENO LA VARIABLE QUE GUARDA EL ID DE EL LIBRO
             //leo los valores 
             this.Ruta = RutaImagen;
             this.Titulo = TituloLibro;
-
+            this.id = IdLibro;
+            //guardo el id recuperado 
+            
             //muestro los datos
             LblTitulo.Text = TituloLibro;
 
@@ -57,12 +63,19 @@ namespace pantalla_inicio
         }
 
         #endregion
-
+        
+        
+        //El evento click de este control 
 
         private void LibroPlantilla_click(object sender, EventArgs e)
         {
+            if (id == 0)
+            {
+                return;
+            }
 
-
+            DatosLibro Libro = new DatosLibro(id);
+            Libro.Show();
         }
     }
 }

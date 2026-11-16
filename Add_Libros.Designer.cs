@@ -303,7 +303,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(700, 497);
+            ClientSize = new Size(700, 525);
             Controls.Add(lblEstrellas);
             Controls.Add(numUpDownCalificacionEstrellas);
             Controls.Add(GuardarInformacionLibroBoton);

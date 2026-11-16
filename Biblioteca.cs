@@ -77,6 +77,8 @@ namespace Biblioteca
 
                 cn.Close();
             }
+           
+            
             //LLAMO A LA CLASE QUE CARGA LOS LIBROS
             //primero este donde se guardan los datos
             DataTable resultado = MostrarLibros.ConsultaLibros();

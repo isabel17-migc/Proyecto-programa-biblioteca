@@ -157,6 +157,7 @@ namespace Apartado_de_Libros_proyecto_progra_III
            Paginas = (int)NumeroPaginasNumericUpDown.Value;
            IdAutor = Convert.ToInt32(SeleccionarAutorComboBox.SelectedValue);
            int Genero = Convert.ToInt32(GeneroLiterarioComboBox.SelectedValue);
+            reseña = ComentarioTextBox.Text;
 
 
             // Verificar que el autor serleccionado en el combobox sea valido
