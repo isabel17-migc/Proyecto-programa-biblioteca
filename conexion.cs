@@ -63,6 +63,14 @@ namespace pantalla_inicio
 
             if (existe == 0)
             {
+                // Crea la base con el nombre de BaseDatos y seleccionarla en esta conexión
+                using (var cmdCrear = new MySqlCommand(
+                    $"CREATE DATABASE `{BaseDatos}` CHARACTER SET utf8mb4;", conexion))
+                {
+                    cmdCrear.ExecuteNonQuery();
+                }
+                conexion.ChangeDatabase(BaseDatos);
+
                 string ruta = Path.Combine(AppContext.BaseDirectory, "script_biblioteca_0.6.sql");
                 string sql = File.ReadAllText(ruta);
 
