@@ -1,5 +1,6 @@
 using Apartado_de_Libros_proyecto_progra_III;
 using Biblioteca;
+using pantalla_inicio;
 using pantalla_loig_in;
 
 namespace dassh_board
@@ -101,7 +102,18 @@ namespace dassh_board
 
         private void btnusuario_Click(object sender, EventArgs e)
         {
+            datosUsuario datos = new datosUsuario();
+            datos.FormClosed += (s, args) => Application.Exit();
+            datos.Show();
+            this.Hide();
+        }
 
+        private void userControl31_Click(object sender, EventArgs e)
+        {
+            datosUsuario datos = new datosUsuario();
+            datos.FormClosed += (s, args) => Application.Exit();
+            datos.Show();
+            this.Hide();
         }
     }
 }

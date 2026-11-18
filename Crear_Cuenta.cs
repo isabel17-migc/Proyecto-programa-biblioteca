@@ -84,9 +84,14 @@ namespace pantalla_inicio
                         MessageBox.Show("Sesión iniciada automaticamente");
 
                         //hago otra consulta que saca el id de el usuario
-                        string comando3 = @"SELECT id_usuario FROM usuario WHERE nombre_usuario = @nusuario AND contraseña = @contraseña";
+                       string comando3 = @"SELECT id_usuario FROM usuario WHERE nombre_usuario = @nusuario";
+                        MySqlParameter[] Parametros1 = new MySqlParameter[]
+                {
+                   new MySqlParameter("@nusuario", nusuario),
+                   new MySqlParameter("@contrasena", contraseña)
+                };
 
-                        MostrarLibros.UsuarioActual = conexion.Leer2(comando3, Parametros);
+                        MostrarLibros.UsuarioActual = conexion.Leer2(comando3, Parametros1);
 
                         Dashboard1 dashboard = new Dashboard1();
 
@@ -95,9 +100,9 @@ namespace pantalla_inicio
                         dashboard.Show();
                         this.Hide();
                     }
-                    catch
+                    catch(MySqlException ex)
                     {
-                        MessageBox.Show("No se pudo guardar el usuario, intenta otra vez");
+                        MessageBox.Show("No se pudo guardar el usuario, intenta otra vez" + ex);
                     }
 
 

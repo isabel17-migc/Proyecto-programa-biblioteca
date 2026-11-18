@@ -41,6 +41,7 @@
             FlbBiblioteca = new FlowLayoutPanel();
             fileSystemWatcher1 = new FileSystemWatcher();
             fileSystemWatcher2 = new FileSystemWatcher();
+            btnRegresar = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)fileSystemWatcher1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)fileSystemWatcher2).BeginInit();
@@ -135,17 +136,17 @@
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(188, 9);
+            textBox1.Location = new Point(172, 8);
             textBox1.Margin = new Padding(3, 2, 3, 2);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(302, 23);
+            textBox1.Size = new Size(271, 23);
             textBox1.TabIndex = 5;
             textBox1.TextChanged += textBox1_TextChanged;
             // 
             // cb_estre
             // 
             cb_estre.FormattingEnabled = true;
-            cb_estre.Location = new Point(509, 8);
+            cb_estre.Location = new Point(449, 9);
             cb_estre.Margin = new Padding(3, 2, 3, 2);
             cb_estre.Name = "cb_estre";
             cb_estre.Size = new Size(133, 23);
@@ -155,7 +156,7 @@
             // cb_autor
             // 
             cb_autor.FormattingEnabled = true;
-            cb_autor.Location = new Point(656, 8);
+            cb_autor.Location = new Point(588, 9);
             cb_autor.Margin = new Padding(3, 2, 3, 2);
             cb_autor.Name = "cb_autor";
             cb_autor.Size = new Size(133, 23);
@@ -182,6 +183,16 @@
             fileSystemWatcher2.SynchronizingObject = this;
             fileSystemWatcher2.Changed += fileSystemWatcher2_Changed;
             // 
+            // btnRegresar
+            // 
+            btnRegresar.Location = new Point(727, 7);
+            btnRegresar.Name = "btnRegresar";
+            btnRegresar.Size = new Size(73, 25);
+            btnRegresar.TabIndex = 13;
+            btnRegresar.Text = "Regresar";
+            btnRegresar.UseVisualStyleBackColor = true;
+            btnRegresar.Click += btnRegresar_Click;
+            // 
             // Biblioteca1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -189,6 +200,7 @@
             BackgroundImage = pantalla_inicio.Properties.Resources.FONDO3;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(812, 518);
+            Controls.Add(btnRegresar);
             Controls.Add(FlbBiblioteca);
             Controls.Add(cb_autor);
             Controls.Add(cb_estre);
@@ -221,5 +233,6 @@
         private FlowLayoutPanel FlbBiblioteca;
         private FileSystemWatcher fileSystemWatcher1;
         private FileSystemWatcher fileSystemWatcher2;
+        private Button btnRegresar;
     }
 }

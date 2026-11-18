@@ -13,7 +13,7 @@ namespace Apartado_de_Libros_proyecto_progra_III
 {
     public partial class AddLibro1 : Form
     {
-     
+
 
         // Variables que voy a necesitar 
         public string rutaImagenSeleccionada = "";
@@ -22,7 +22,7 @@ namespace Apartado_de_Libros_proyecto_progra_III
         string Titulo = "";
         DateTime FechaInicio;
         DateTime FechaFin;
-        public int Paginas = 0 ;
+        public int Paginas = 0;
         public int IdAutor = 0;
 
         // Propiedad pública que devolverá el libro registrado a la ventana principal
@@ -52,7 +52,7 @@ namespace Apartado_de_Libros_proyecto_progra_III
         {
 
         }
-        
+
         private void RegistrarAutorTextBox_KeyDown(object sender, KeyEventArgs e) //le cambie al keydawn aqui en en el designer para que detecte las teclas que el usuario presiona
         {
             string Autor = "";
@@ -61,7 +61,8 @@ namespace Apartado_de_Libros_proyecto_progra_III
             if (e.KeyCode == Keys.Enter)
             {
                 //verifico que no este vacio y lo guardo
-                if (!string.IsNullOrEmpty(RegistrarAutorTextBox.Text)) {
+                if (!string.IsNullOrEmpty(RegistrarAutorTextBox.Text))
+                {
                     Autor = RegistrarAutorTextBox.Text.Trim();
 
                     try
@@ -84,8 +85,8 @@ namespace Apartado_de_Libros_proyecto_progra_III
                     }
 
                 }
-                
-              
+
+
                 //llamo la funcion que vuelve a cargar los datos en el combobox
                 CargarAutores();
             }
@@ -113,7 +114,7 @@ namespace Apartado_de_Libros_proyecto_progra_III
                     // Cargar la imagen en el PictureBox especificado
                     ImagenLibroPictureBox.Image = Image.FromFile(openFileDialog.FileName);
 
-                                        // Ajustar el tamaño para que la portada no se deforme
+                    // Ajustar el tamaño para que la portada no se deforme
                     ImagenLibroPictureBox.SizeMode = PictureBoxSizeMode.Zoom;
                 }
             }
@@ -129,7 +130,7 @@ namespace Apartado_de_Libros_proyecto_progra_III
         private void Form1_Load(object sender, EventArgs e)
         {
             ActualizarEstrellas(); // Muestra las estrellas iniciales al abrir la ventana
-            
+
         }
 
         #region el metodo que muestra las estrellas  y las guarda en la variable estrellas llenas
@@ -146,26 +147,42 @@ namespace Apartado_de_Libros_proyecto_progra_III
 
         #endregion
 
-
         #region este metodo guarda la informacion de el libro en la base de datos
         private void GuardarInformacionLibroBoton_Click(object sender, EventArgs e)
         {
             //le asigno valor a las variables que faltan
-           Titulo = NombrarLibroTextBox.Text;
-           FechaInicio = FechaInicioDateTimePicker.Value;
-           FechaFin = FechaDeFinalizacionDateTimePicker.Value;
-           Paginas = (int)NumeroPaginasNumericUpDown.Value;
-           IdAutor = Convert.ToInt32(SeleccionarAutorComboBox.SelectedValue);
-           int Genero = Convert.ToInt32(GeneroLiterarioComboBox.SelectedValue);
+            Titulo = NombrarLibroTextBox.Text;
+            FechaInicio = FechaInicioDateTimePicker.Value;
+            FechaFin = FechaDeFinalizacionDateTimePicker.Value;
+            Paginas = (int)NumeroPaginasNumericUpDown.Value;
+            IdAutor = Convert.ToInt32(SeleccionarAutorComboBox.SelectedValue);
+            int Genero = Convert.ToInt32(GeneroLiterarioComboBox.SelectedValue);
             reseña = ComentarioTextBox.Text;
 
+            if (IdAutor == 0)
+            {
+                MessageBox.Show("El autor es obligatorio");
+                MessageBox.Show("No tienes ningun autor guardado todavia, intenta agregar uno!");
+                RegistrarAutorTextBox.Focus();
 
-            // Verificar que el autor serleccionado en el combobox sea valido
-            if (IdAutor != 0)
+
+            }
+            else if (Titulo == "")
+            {
+                MessageBox.Show("El titulo es obligatorio");
+                NombrarLibroTextBox.Focus();
+
+            }
+            else
             {
                 //hago que la imagen se guarde en la carpeta portadas libros llamando al metodo guardarimgen 
                 crear_carpeta.CrearCarpetaSiNoExiste();
                 string rutaPortada = crear_carpeta.GuardarImagenEnCarpeta(crear_carpeta.RutaCarpeta, Titulo, rutaImagenSeleccionada);
+
+
+
+
+
 
 
 
@@ -186,7 +203,9 @@ namespace Apartado_de_Libros_proyecto_progra_III
                 new MySqlParameter("@ruta", rutaPortada),
                 new MySqlParameter("@paginas", Paginas)
                 };
-                //lamo a el metodo
+
+
+                #region en esta parte ya se hace la consulta llamo a el metodo
                 try
                 {
                     conexion.Ejecutar(comando, Parametros);
@@ -207,8 +226,10 @@ namespace Apartado_de_Libros_proyecto_progra_III
                      MessageBoxIcon.Error
                      );
                 }
-                //ahora voy a consultar el id generado de el libro y guardar el genero
-               
+
+                #endregion
+                #region ahora voy a consultar el id generado de el libro y guardar el genero
+
                 //consulta 1 para saber el id de el libro
                 string comando1 = @"SELECT id_libro FROM libros WHERE titulo = @titulo AND id_usuario = @usuarioactual  ";
                 MySqlParameter[] parametros1 = new MySqlParameter[] {
@@ -224,13 +245,19 @@ namespace Apartado_de_Libros_proyecto_progra_III
                     new MySqlParameter("@idgenero", Convert.ToInt32(GeneroLiterarioComboBox.SelectedValue))
                 };
                 conexion.Ejecutar(comando2, parametros2);
+                #endregion
 
-
+                #endregion
 
 
             }
-                #endregion
+
+
+
+
         }
+
+
 
         #endregion
 
@@ -251,10 +278,10 @@ namespace Apartado_de_Libros_proyecto_progra_III
 
                 if (!string.IsNullOrEmpty(reseña))
                 {
-                   
+
                     MessageBox.Show("Guardaste el comentario, ahora guarda el libro", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    
-                    
+
+
                 }
                 else
                 {
@@ -293,7 +320,7 @@ namespace Apartado_de_Libros_proyecto_progra_III
         }
 
         #endregion
-      
+
         #region Metodo cargar autores
         private void CargarAutores()
         {
@@ -346,7 +373,7 @@ namespace Apartado_de_Libros_proyecto_progra_III
                 GeneroLiterarioComboBox.DisplayMember = "genero";
                 GeneroLiterarioComboBox.ValueMember = "id_genero";
             }
-            catch(MySqlException ex)
+            catch (MySqlException ex)
             {
                 MessageBox.Show(
                     $"Error SQL #{ex.Number}: {ex.Message}",
@@ -364,10 +391,58 @@ namespace Apartado_de_Libros_proyecto_progra_III
         {
 
         }
+
+        private void btnRegresar_Click(object sender, EventArgs e)
+        {
+            Dashboard1 dashboard = new Dashboard1();
+
+            dashboard.FormClosed += (s, args) => Application.Exit();
+
+            dashboard.Show();
+            this.Hide();
+        }
+
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            string Autor = "";
+            //CODIGO ESTE PARA QUE SE INSERTEN LOS AUTORES EN LA BASE DE DATOS
+            // Validar si la tecla presionada es ENTER
+
+            //verifico que no este vacio y lo guardo
+            if (!string.IsNullOrEmpty(RegistrarAutorTextBox.Text))
+            {
+                Autor = RegistrarAutorTextBox.Text.Trim();
+
+                try
+                {
+                    //el comando
+                    string comando = @"INSERT INTO autores(id_usuario, nombre) VALUES (@usuario, @autor)";
+                    //creo los parametros
+                    MySqlParameter[] Parametros = new MySqlParameter[]
+                    {
+                    new MySqlParameter("@usuario", MostrarLibros.UsuarioActual),
+                    new MySqlParameter("@autor", Autor)
+
+                    };
+                    //metodo
+                    conexion.Ejecutar(comando, Parametros);
+                }
+                catch
+                {
+                    MessageBox.Show("Error al guardar el autor");
+                }
+
+
+
+
+                //llamo la funcion que vuelve a cargar los datos en el combobox
+                CargarAutores();
+            }
+        }
+
+
+
+
+
     }
-        
-
-
-
-
 }

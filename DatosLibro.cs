@@ -21,11 +21,11 @@ namespace pantalla_inicio
 
 
         private int IdLibroActual; //la variable que guardara el id
-        public int Calificacion= 0;
+        public int Calificacion = 0;
         public string Ruta = "";
-   
 
-        
+
+
 
         private void DatosLibro_Load(object sender, EventArgs e)
         {
@@ -66,9 +66,9 @@ namespace pantalla_inicio
             ON gl.id_genero = g.id_genero
             WHERE l.id_libro = @idlibroactual";
 
-            MySqlParameter[] Parametros = new MySqlParameter[] { 
+            MySqlParameter[] Parametros = new MySqlParameter[] {
             new MySqlParameter("@idlibroactual", IdLibroActual)
-            
+
             };
             DataTable Resultado = conexion.Leer(Comando, Parametros);
             if (Resultado.Rows.Count > 0)
@@ -83,17 +83,53 @@ namespace pantalla_inicio
                 LblPaginas.Text = libro["paginas"].ToString();
                 LblGenero.Text = libro["genero"].ToString();
                 Ruta = libro["portada"].ToString();
-                PicPortada1.Image = Image.FromFile(Ruta);
-                PicPortada1.SizeMode = PictureBoxSizeMode.Zoom;
+                Calificacion = Convert.ToInt32(libro["calificacion"]);
+                string estrellas = new string('★', Calificacion);
+                lblEstrellas.Text = estrellas;
+
+                if (!string.IsNullOrWhiteSpace(Ruta))
+                {
+                    PicPortada1.Image = Image.FromFile(Ruta);
+                    PicPortada1.SizeMode = PictureBoxSizeMode.Zoom;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Error");
 
             }
-          
-            
+
+
 
 
         }
 
         #endregion
 
+        #region evento click de editar
+
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Entrando a el modo edición...");
+            edicionLibro edicion = new edicionLibro(IdLibroActual);
+            edicion.FormClosed += (s, args) => Application.Exit();
+            edicion.Show();
+            this.Hide();
+
+        }
+
+        #endregion
+
+
+
+        private void btnRegresar_Click(object sender, EventArgs e)
+        {
+            Dashboard1 dashboard = new Dashboard1();
+
+            dashboard.FormClosed += (s, args) => Application.Exit();
+
+            dashboard.Show();
+            this.Hide();
+        }
     }
 }

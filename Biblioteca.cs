@@ -40,8 +40,7 @@ namespace Biblioteca
 
         private void Biblioteca1_Load(object sender, EventArgs e)
         {
-
-
+            
             cb_estre.Items.Clear(); //Limpiamos primero el combobox de los items de la conexion anterior
             cb_autor.Items.Clear(); //Limpiamos primero el combobox de los items de la conexion anterior
 
@@ -77,8 +76,8 @@ namespace Biblioteca
 
                 cn.Close();
             }
-           
-            
+
+
             //LLAMO A LA CLASE QUE CARGA LOS LIBROS
             //primero este donde se guardan los datos
             DataTable resultado = MostrarLibros.ConsultaLibros();
@@ -99,7 +98,10 @@ namespace Biblioteca
 
         private void btnusuario_Click(object sender, EventArgs e)
         {
-
+            datosUsuario datos = new datosUsuario();
+            datos.FormClosed += (s, args) => Application.Exit();
+            datos.Show();
+            this.Hide();
         }
         #region botones
         private void btnagg_Click_1(object sender, EventArgs e)
@@ -150,6 +152,16 @@ namespace Biblioteca
         private void fileSystemWatcher2_Changed(object sender, FileSystemEventArgs e)
         {
 
+        }
+
+        private void btnRegresar_Click(object sender, EventArgs e)
+        {
+            Dashboard1 dashboard = new Dashboard1();
+
+            dashboard.FormClosed += (s, args) => Application.Exit();
+
+            dashboard.Show();
+            this.Hide();
         }
     }
 }

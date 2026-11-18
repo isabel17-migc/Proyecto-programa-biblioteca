@@ -29,40 +29,46 @@ namespace pantalla_inicio
         {
             if (string.IsNullOrWhiteSpace(rutaImagenSeleccionada) || !File.Exists(rutaImagenSeleccionada))
             {
-                throw new FileNotFoundException("No se encontró la imagen seleccionada.", rutaImagenSeleccionada);
+               
+                string rutaPortada = "";
+                return rutaPortada; //jsjj segun yo devuelvo un 0 y voy a poner un if al leerlo de que boleano
             }
-
-            Directory.CreateDirectory(rutaCarpeta);
-
-            //voy a revisar primero que el libro no tenga caracteres invalidos para el nombre del archivo
-            string TituloRevisado = ""; //en esta variable se va a guardar el titulo sin caracteres invalidos
-            //creo un ciclo for que revisa cada caracter de el titulo y si es un caracter invalido lo reemplaza por un guion bajo
-            for (int i = 0; i < Titulo.Length; i++)
+            else
             {
-                char c = Titulo[i];
-                if (c == ':' || c == '*' || c == '?' || c == '"' || c == '<' || c == '>' || c == '|')
+
+                Directory.CreateDirectory(rutaCarpeta);
+
+                //voy a revisar primero que el libro no tenga caracteres invalidos para el nombre del archivo
+                string TituloRevisado = ""; //en esta variable se va a guardar el titulo sin caracteres invalidos
+                                            //creo un ciclo for que revisa cada caracter de el titulo y si es un caracter invalido lo reemplaza por un guion bajo
+                for (int i = 0; i < Titulo.Length; i++)
                 {
-                    TituloRevisado += '_';
+                    char c = Titulo[i];
+                    if (c == ':' || c == '*' || c == '?' || c == '"' || c == '<' || c == '>' || c == '|')
+                    {
+                        TituloRevisado += '_';
+                    }
+                    else
+                    {
+                        TituloRevisado += c;
+                    }
                 }
-                else
-                {
-                    TituloRevisado += c;
-                }
+
+                //obtengo la extension de el archivo de la imagen seleccionada
+                string extension = Path.GetExtension(rutaImagenSeleccionada);
+
+
+                //propiedades
+                string nombrePortada = TituloRevisado + "_portada" + extension; // Obtiene el nombre del libro desde la variable esta
+
+                // Obtiene la ruta completa donde se va a guardar la imagen 
+                string rutaPortada = Path.Combine(rutaCarpeta, nombrePortada);
+
+                // Copia la imagen original a la carpeta portadas_libros con el nuevo nombre
+                System.IO.File.Copy(rutaImagenSeleccionada, rutaPortada, true); // El tercer parámetro 'true' permite sobrescribir si el archivo ya existe
+                return rutaPortada;//devuelvo eso porque lo ocupo para guardarlo en la base de datos
+
             }
-
-            //obtengo la extension de el archivo de la imagen seleccionada
-          string  extension = Path.GetExtension(rutaImagenSeleccionada);
-        
-
-            //propiedades
-            string nombrePortada = TituloRevisado + "_portada" + extension; // Obtiene el nombre del libro desde la variable esta
-
-            // Obtiene la ruta completa donde se va a guardar la imagen 
-            string rutaPortada = Path.Combine(rutaCarpeta, nombrePortada); 
-           
-            // Copia la imagen original a la carpeta portadas_libros con el nuevo nombre
-            System.IO.File.Copy(rutaImagenSeleccionada, rutaPortada, true); // El tercer parámetro 'true' permite sobrescribir si el archivo ya existe
-            return rutaPortada;//devuelvo eso porque lo ocupo para guardarlo en la base de datos
         }
     }
 }

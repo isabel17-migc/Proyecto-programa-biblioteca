@@ -37,7 +37,7 @@
             // 
             LblTitulo.AutoSize = true;
             LblTitulo.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            LblTitulo.Location = new Point(34, 150);
+            LblTitulo.Location = new Point(47, 150);
             LblTitulo.Name = "LblTitulo";
             LblTitulo.Size = new Size(38, 13);
             LblTitulo.TabIndex = 0;
@@ -45,9 +45,11 @@
             // 
             // PicPortada
             // 
-            PicPortada.Location = new Point(0, 0);
+            PicPortada.BackgroundImage = Properties.Resources.portadaDefault;
+            PicPortada.Location = new Point(12, 0);
             PicPortada.Name = "PicPortada";
             PicPortada.Size = new Size(106, 147);
+            PicPortada.SizeMode = PictureBoxSizeMode.Zoom;
             PicPortada.TabIndex = 1;
             PicPortada.TabStop = false;
             // 
@@ -59,7 +61,8 @@
             Controls.Add(PicPortada);
             Controls.Add(LblTitulo);
             Name = "LibroPlantilla";
-            Size = new Size(105, 166);
+            Size = new Size(128, 177);
+            Load += LibroPlantilla_Load;
             Click += LibroPlantilla_click;
             ((System.ComponentModel.ISupportInitialize)PicPortada).EndInit();
             ResumeLayout(false);

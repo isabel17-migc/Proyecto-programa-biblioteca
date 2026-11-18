@@ -51,6 +51,8 @@
             GuardarInformacionLibroBoton = new Button();
             numUpDownCalificacionEstrellas = new NumericUpDown();
             lblEstrellas = new Label();
+            btnRegresar = new Button();
+            btnAgregar = new Button();
             ((System.ComponentModel.ISupportInitialize)ImagenLibroPictureBox).BeginInit();
             ((System.ComponentModel.ISupportInitialize)NumeroPaginasNumericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numUpDownCalificacionEstrellas).BeginInit();
@@ -297,13 +299,35 @@
             lblEstrellas.TabIndex = 21;
             lblEstrellas.Text = "★★★★★";
             // 
+            // btnRegresar
+            // 
+            btnRegresar.Location = new Point(615, 12);
+            btnRegresar.Name = "btnRegresar";
+            btnRegresar.Size = new Size(75, 23);
+            btnRegresar.TabIndex = 22;
+            btnRegresar.Text = "Regresar";
+            btnRegresar.UseVisualStyleBackColor = true;
+            btnRegresar.Click += btnRegresar_Click;
+            // 
+            // btnAgregar
+            // 
+            btnAgregar.Location = new Point(565, 116);
+            btnAgregar.Name = "btnAgregar";
+            btnAgregar.Size = new Size(75, 23);
+            btnAgregar.TabIndex = 23;
+            btnAgregar.Text = "Agregar";
+            btnAgregar.UseVisualStyleBackColor = true;
+            btnAgregar.Click += btnAgregar_Click;
+            // 
             // AddLibro1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(700, 525);
+            ClientSize = new Size(700, 679);
+            Controls.Add(btnAgregar);
+            Controls.Add(btnRegresar);
             Controls.Add(lblEstrellas);
             Controls.Add(numUpDownCalificacionEstrellas);
             Controls.Add(GuardarInformacionLibroBoton);
@@ -365,5 +389,7 @@
         private Button GuardarInformacionLibroBoton;
         private NumericUpDown numUpDownCalificacionEstrellas;
         private Label lblEstrellas;
+        private Button btnRegresar;
+        private Button btnAgregar;
     }
 }

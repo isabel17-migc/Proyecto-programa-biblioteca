@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
+using Biblioteca;
 
 namespace pantalla_inicio
 {
@@ -38,7 +39,7 @@ namespace pantalla_inicio
             this.Titulo = TituloLibro;
             this.id = IdLibro;
             //guardo el id recuperado 
-            
+
             //muestro los datos
             LblTitulo.Text = TituloLibro;
 
@@ -48,9 +49,8 @@ namespace pantalla_inicio
                 using (var stream = new FileStream(RutaImagen, FileMode.Open, FileAccess.Read))
                 {
 
-                    PicPortada.Image = Image.FromStream(stream);
-
-                    // Ajustar el tamaño para que la portada no se deforme
+                    PicPortada.Image?.Dispose();
+                    PicPortada.Image = Image.FromFile(RutaImagen);
                     PicPortada.SizeMode = PictureBoxSizeMode.Zoom;
                 }
             }
@@ -63,8 +63,8 @@ namespace pantalla_inicio
         }
 
         #endregion
-        
-        
+
+
         //El evento click de este control 
 
         private void LibroPlantilla_click(object sender, EventArgs e)
@@ -75,7 +75,18 @@ namespace pantalla_inicio
             }
 
             DatosLibro Libro = new DatosLibro(id);
+            this.FindForm().Hide();//este busca y cierra el formulario
             Libro.Show();
+            
+        }
+
+        private void LibroPlantilla_Load(object sender, EventArgs e)
+        {
+            LblTitulo.AutoSize = true ;
+            LblTitulo.Dock = DockStyle.Bottom;
+            LblTitulo.MaximumSize = new Size(128, 128);
+            PicPortada.Image = Properties.Resources.portadaDefault;
+            PicPortada.SizeMode = PictureBoxSizeMode.Zoom;
         }
     }
 }

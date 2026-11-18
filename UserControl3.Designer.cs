@@ -46,6 +46,7 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(196, 60);
             panel1.TabIndex = 0;
+            panel1.Click += panel1_Click;
             // 
             // label1
             // 
@@ -80,6 +81,8 @@
             Controls.Add(panel1);
             Name = "UserControl3";
             Size = new Size(196, 126);
+            Load += UserControl3_Load;
+            Click += UserControl3_Click;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();

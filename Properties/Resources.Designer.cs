@@ -133,6 +133,16 @@ namespace pantalla_inicio.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap portadaDefault {
+            get {
+                object obj = ResourceManager.GetObject("portadaDefault", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap USUARIO {
             get {
                 object obj = ResourceManager.GetObject("USUARIO", resourceCulture);
