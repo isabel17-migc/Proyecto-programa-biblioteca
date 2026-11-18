@@ -6,20 +6,22 @@ Servidor: localhost
 Puerto: 3306
 Usuario: root
 Contraseña: ["vacía" ]
-Base de datos: ["script_biblioteca_0.4.sql"]
+Base de datos: ["script_biblioteca_0.6.sql"]
 
 La base de datos se crea automáticamente al iniciar el programa.
 
 Si en su computadora el usuario o la contraseña de MySQL son
 distintos, visual studio mostrará un aviso de que no pudo conectarse
 y se cerrará. No es un error del programa: solo es necesario
-cambiar esos datos en el archivo [conexion.cs], en la línea :
+cambiar esos datos (respectivamente) en el archivo [conexion.cs], en las líneas :
 
- 10-  public string Usuario { get; set; } = "root";
- 11-  public string Password { get; set; } = "";
+  12-public static string Servidor { get; set; } = "localhost";
+  13-public static uint Puerto { get; set; } = 3306;
+  14-public static string BaseDatos = "biblioteca_copia";
+  15-public static string Usuario { get; set; } = "root";
+  16-public static string Password { get; set; } = "";
 
+(cambiar solo el texto dentro de los "" a el dato que se tiene)
 , y volver a ejecutar.
-
-En la entrega final este paso ya no será necesario.
 
 Una gran disculpa por la molestia de tener que hacer este ajuste.
