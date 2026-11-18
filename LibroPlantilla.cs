@@ -42,6 +42,7 @@ namespace pantalla_inicio
 
             //muestro los datos
             LblTitulo.Text = TituloLibro;
+            
 
             //para la imagen primero reviso que exista
             if (File.Exists(RutaImagen))
@@ -56,7 +57,7 @@ namespace pantalla_inicio
             }
             else
             {
-                PicPortada.Image = null;
+                PicPortada.Image = Properties.Resources.portadaDefault;
             }
 
 
@@ -82,10 +83,7 @@ namespace pantalla_inicio
 
         private void LibroPlantilla_Load(object sender, EventArgs e)
         {
-            LblTitulo.AutoSize = true ;
-            LblTitulo.Dock = DockStyle.Bottom;
-            LblTitulo.MaximumSize = new Size(128, 128);
-            PicPortada.Image = Properties.Resources.portadaDefault;
+           
             PicPortada.SizeMode = PictureBoxSizeMode.Zoom;
         }
     }

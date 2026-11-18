@@ -62,12 +62,14 @@
             // 
             // lblTitulo1
             // 
+            lblTitulo1.Anchor = AnchorStyles.Top;
             lblTitulo1.AutoSize = true;
             lblTitulo1.BackColor = Color.Thistle;
-            lblTitulo1.Font = new Font("Stencil", 27.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblTitulo1.Location = new Point(262, 16);
+            lblTitulo1.Font = new Font("Stencil", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblTitulo1.Location = new Point(249, 16);
+            lblTitulo1.MaximumSize = new Size(490, 100);
             lblTitulo1.Name = "lblTitulo1";
-            lblTitulo1.Size = new Size(150, 44);
+            lblTitulo1.Size = new Size(98, 29);
             lblTitulo1.TabIndex = 1;
             lblTitulo1.Text = "label1";
             // 
@@ -76,7 +78,7 @@
             label1.AutoSize = true;
             label1.BackColor = Color.Thistle;
             label1.Font = new Font("Rockwell", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(262, 69);
+            label1.Location = new Point(262, 101);
             label1.Name = "label1";
             label1.Size = new Size(55, 19);
             label1.TabIndex = 2;
@@ -87,7 +89,7 @@
             label2.AutoSize = true;
             label2.BackColor = Color.Thistle;
             label2.Font = new Font("Rockwell", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(569, 70);
+            label2.Location = new Point(569, 102);
             label2.Name = "label2";
             label2.Size = new Size(124, 19);
             label2.TabIndex = 3;
@@ -98,7 +100,7 @@
             label3.AutoSize = true;
             label3.BackColor = Color.Thistle;
             label3.Font = new Font("Rockwell", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(569, 135);
+            label3.Location = new Point(569, 167);
             label3.Name = "label3";
             label3.Size = new Size(103, 19);
             label3.TabIndex = 4;
@@ -109,7 +111,7 @@
             label5.AutoSize = true;
             label5.BackColor = Color.Thistle;
             label5.Font = new Font("Rockwell", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label5.Location = new Point(262, 202);
+            label5.Location = new Point(262, 234);
             label5.Name = "label5";
             label5.Size = new Size(159, 19);
             label5.TabIndex = 6;
@@ -120,7 +122,7 @@
             label6.AutoSize = true;
             label6.BackColor = Color.Thistle;
             label6.Font = new Font("Rockwell", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label6.Location = new Point(262, 134);
+            label6.Location = new Point(262, 166);
             label6.Name = "label6";
             label6.Size = new Size(99, 19);
             label6.TabIndex = 7;
@@ -150,7 +152,7 @@
             // 
             LblInicio.AutoSize = true;
             LblInicio.BackColor = Color.Transparent;
-            LblInicio.Location = new Point(699, 76);
+            LblInicio.Location = new Point(699, 108);
             LblInicio.Name = "LblInicio";
             LblInicio.Size = new Size(38, 15);
             LblInicio.TabIndex = 12;
@@ -161,7 +163,7 @@
             // 
             LblFin.AutoSize = true;
             LblFin.BackColor = Color.Transparent;
-            LblFin.Location = new Point(699, 139);
+            LblFin.Location = new Point(699, 171);
             LblFin.Name = "LblFin";
             LblFin.Size = new Size(38, 15);
             LblFin.TabIndex = 13;
@@ -172,7 +174,7 @@
             // 
             LblPaginas.AutoSize = true;
             LblPaginas.BackColor = Color.Transparent;
-            LblPaginas.Location = new Point(427, 206);
+            LblPaginas.Location = new Point(427, 238);
             LblPaginas.Name = "LblPaginas";
             LblPaginas.Size = new Size(38, 15);
             LblPaginas.TabIndex = 14;
@@ -184,7 +186,7 @@
             label10.AutoSize = true;
             label10.BackColor = Color.Thistle;
             label10.Font = new Font("Rockwell", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label10.Location = new Point(569, 202);
+            label10.Location = new Point(569, 234);
             label10.Name = "label10";
             label10.Size = new Size(70, 19);
             label10.TabIndex = 15;
@@ -194,7 +196,7 @@
             // 
             LblGenero.AutoSize = true;
             LblGenero.BackColor = Color.Transparent;
-            LblGenero.Location = new Point(699, 207);
+            LblGenero.Location = new Point(699, 239);
             LblGenero.Name = "LblGenero";
             LblGenero.Size = new Size(38, 15);
             LblGenero.TabIndex = 16;
@@ -228,7 +230,7 @@
             // 
             lblEstrellas.AutoSize = true;
             lblEstrellas.BackColor = Color.Transparent;
-            lblEstrellas.Location = new Point(367, 134);
+            lblEstrellas.Location = new Point(367, 166);
             lblEstrellas.Name = "lblEstrellas";
             lblEstrellas.Size = new Size(62, 15);
             lblEstrellas.TabIndex = 17;
@@ -239,7 +241,7 @@
             // 
             LblAutor.AutoSize = true;
             LblAutor.BackColor = Color.Transparent;
-            LblAutor.Location = new Point(333, 72);
+            LblAutor.Location = new Point(333, 104);
             LblAutor.Name = "LblAutor";
             LblAutor.Size = new Size(38, 15);
             LblAutor.TabIndex = 11;

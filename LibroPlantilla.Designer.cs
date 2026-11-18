@@ -35,17 +35,17 @@
             // 
             // LblTitulo
             // 
-            LblTitulo.AutoSize = true;
+            LblTitulo.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
             LblTitulo.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            LblTitulo.Location = new Point(47, 150);
+            LblTitulo.Location = new Point(13, 150);
             LblTitulo.Name = "LblTitulo";
-            LblTitulo.Size = new Size(38, 13);
+            LblTitulo.Size = new Size(105, 27);
             LblTitulo.TabIndex = 0;
             LblTitulo.Text = "label1";
+            LblTitulo.TextAlign = ContentAlignment.TopCenter;
             // 
             // PicPortada
             // 
-            PicPortada.BackgroundImage = Properties.Resources.portadaDefault;
             PicPortada.Location = new Point(12, 0);
             PicPortada.Name = "PicPortada";
             PicPortada.Size = new Size(106, 147);
@@ -66,7 +66,6 @@
             Click += LibroPlantilla_click;
             ((System.ComponentModel.ISupportInitialize)PicPortada).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
