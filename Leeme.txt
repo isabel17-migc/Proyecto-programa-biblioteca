@@ -24,4 +24,6 @@ cambiar esos datos (respectivamente) en el archivo [conexion.cs], en las líneas
 (cambiar solo el texto dentro de los "" a el dato que se tiene)
 , y volver a ejecutar.
 
+y si esta usando MariaDB de Xampp, porfavor inicializar antes el servicio
+
 Una gran disculpa por la molestia de tener que hacer este ajuste.
