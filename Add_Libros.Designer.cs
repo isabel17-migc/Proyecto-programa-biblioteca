@@ -208,7 +208,7 @@
             ComentarioTextBox.Margin = new Padding(3, 2, 3, 2);
             ComentarioTextBox.Multiline = true;
             ComentarioTextBox.Name = "ComentarioTextBox";
-            ComentarioTextBox.Size = new Size(680, 178);
+            ComentarioTextBox.Size = new Size(680, 133);
             ComentarioTextBox.TabIndex = 13;
             ComentarioTextBox.KeyDown += ComentarioTextBox_KeyDown;
             // 
@@ -267,7 +267,7 @@
             // 
             GuardarInformacionLibroBoton.BackColor = Color.Lavender;
             GuardarInformacionLibroBoton.Font = new Font("Sitka Text", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            GuardarInformacionLibroBoton.Location = new Point(256, 670);
+            GuardarInformacionLibroBoton.Location = new Point(248, 624);
             GuardarInformacionLibroBoton.Margin = new Padding(3, 2, 3, 2);
             GuardarInformacionLibroBoton.Name = "GuardarInformacionLibroBoton";
             GuardarInformacionLibroBoton.Size = new Size(206, 44);
