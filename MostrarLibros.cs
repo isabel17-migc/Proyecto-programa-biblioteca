@@ -20,17 +20,37 @@ namespace pantalla_inicio
       
 
         //AHORA VOY A PONER EL METODO QUE PRIMERO VA A REALIZAR LA CONSULTA PRINCIPAL, LA QUE CARGA TODOS LOS LIBRO
-        public static DataTable ConsultaLibros()
+        public static DataTable ConsultaLibros(string estrella="Todos", string genero="Todos") //Parametros del metodo
         {
 
-            MySqlParameter[] parametro = new MySqlParameter[]{
-           new MySqlParameter ("@usuarioactual", UsuarioActual) 
-            };
+            string consulta = ConsultaSql; //creo una copia para que aqui se guarden los cambios de la consultas, ya que el original es static
 
-            //voy a traer mi metodo que hace consultas
-            DataTable resultado = conexion.Leer(ConsultaSql, parametro); //segun yo llame al metodo y le pase el parametrono se si este bien  y lo guarde en la tabla
-           //y ya nomas pongo para que me devuelva la tabla 
-           return resultado;
+            List<MySqlParameter> parametros = new List<MySqlParameter>();
+            parametros.Add(new MySqlParameter("@usuarioactual", UsuarioActual)); //Los parametros los hice una lista ya que se van a ir agregando nuevos parametros
+            
+
+            //Para fitrar estrellas
+
+            if(estrella != "Todos")
+            {
+                consulta += " AND calificacion = @calificacion"; //agrega esto a la consulta original (la que llama los libros)";
+                parametros.Add (new MySqlParameter("@calificacion", Convert.ToInt32(estrella))); //agregue la calificación a los parametros y la converti en numero
+            }
+
+            //Para filtrar los generos
+
+            if(genero != "Todos")
+            {
+                consulta += " AND id_libro IN" +
+                    "(SELECT gl.id_libro " +
+                    "FROM genero_libro gl " +
+                    "INNER JOIN genero g ON " +
+                    "g.id_genero = gl.id_genero " +
+                    "WHERE g.genero = @genero)";
+                parametros.Add(new MySqlParameter("@genero", genero));
+            }
+
+            return conexion.Leer(consulta, parametros.ToArray()); //Se cambio los parametros a arreglos otravez, porque Leer pide arreglo no lista
         }
 
         #region Metodo que muestra los libros

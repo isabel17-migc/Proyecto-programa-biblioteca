@@ -30,6 +30,7 @@ namespace pantalla_inicio
         {
             datosUsuario datos = new datosUsuario();
             datos.FormClosed += (s, args) => Application.Exit();
+            datos.Show();
             this.Hide();
         }
 

@@ -33,7 +33,6 @@
             piclogo = new PictureBox();
             btniniciar = new Button();
             lblfrase = new Label();
-            linkpolitica = new LinkLabel();
             ((System.ComponentModel.ISupportInitialize)piclogo).BeginInit();
             SuspendLayout();
             // 
@@ -87,20 +86,8 @@
             lblfrase.ForeColor = Color.DarkMagenta;
             lblfrase.Location = new Point(72, 588);
             lblfrase.Name = "lblfrase";
-            lblfrase.Size = new Size(494, 35);
+            lblfrase.Size = new Size(2, 35);
             lblfrase.TabIndex = 3;
-            lblfrase.Text = "Tus libros, tus reseñas, tu historia de lectura";
-            // 
-            // linkpolitica
-            // 
-            linkpolitica.AutoSize = true;
-            linkpolitica.BorderStyle = BorderStyle.Fixed3D;
-            linkpolitica.Location = new Point(366, 669);
-            linkpolitica.Name = "linkpolitica";
-            linkpolitica.Size = new Size(213, 22);
-            linkpolitica.TabIndex = 4;
-            linkpolitica.TabStop = true;
-            linkpolitica.Text = "VER POLITICA DE PRIVACIDAD";
             // 
             // Inicio
             // 
@@ -108,7 +95,6 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             ClientSize = new Size(601, 704);
-            Controls.Add(linkpolitica);
             Controls.Add(lblfrase);
             Controls.Add(btniniciar);
             Controls.Add(piclogo);
@@ -131,6 +117,5 @@
         private PictureBox piclogo;
         private Button btniniciar;
         private Label lblfrase;
-        private LinkLabel linkpolitica;
     }
 }

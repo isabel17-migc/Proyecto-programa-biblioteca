@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(datosUsuarioEditar));
             txtContraseña = new TextBox();
             txtNombre = new TextBox();
             btnAceptar = new Button();
@@ -39,24 +40,27 @@
             // 
             // txtContraseña
             // 
-            txtContraseña.Location = new Point(243, 175);
+            txtContraseña.Location = new Point(222, 233);
+            txtContraseña.Margin = new Padding(3, 4, 3, 4);
             txtContraseña.Name = "txtContraseña";
-            txtContraseña.PasswordChar = '*';
-            txtContraseña.Size = new Size(321, 23);
+            txtContraseña.Size = new Size(366, 27);
             txtContraseña.TabIndex = 14;
+            txtContraseña.UseSystemPasswordChar = true;
             // 
             // txtNombre
             // 
-            txtNombre.Location = new Point(300, 129);
+            txtNombre.Location = new Point(287, 172);
+            txtNombre.Margin = new Padding(3, 4, 3, 4);
             txtNombre.Name = "txtNombre";
-            txtNombre.Size = new Size(321, 23);
+            txtNombre.Size = new Size(366, 27);
             txtNombre.TabIndex = 13;
             // 
             // btnAceptar
             // 
-            btnAceptar.Location = new Point(627, 22);
+            btnAceptar.Location = new Point(629, 29);
+            btnAceptar.Margin = new Padding(3, 4, 3, 4);
             btnAceptar.Name = "btnAceptar";
-            btnAceptar.Size = new Size(75, 23);
+            btnAceptar.Size = new Size(86, 31);
             btnAceptar.TabIndex = 12;
             btnAceptar.Text = "Aceptar";
             btnAceptar.UseVisualStyleBackColor = true;
@@ -64,9 +68,10 @@
             // 
             // btnCancelar
             // 
-            btnCancelar.Location = new Point(546, 22);
+            btnCancelar.Location = new Point(537, 29);
+            btnCancelar.Margin = new Padding(3, 4, 3, 4);
             btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(75, 23);
+            btnCancelar.Size = new Size(86, 31);
             btnCancelar.TabIndex = 11;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = true;
@@ -77,9 +82,9 @@
             label3.AutoSize = true;
             label3.BackColor = Color.Thistle;
             label3.Font = new Font("Rockwell", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(138, 179);
+            label3.Location = new Point(102, 239);
             label3.Name = "label3";
-            label3.Size = new Size(99, 19);
+            label3.Size = new Size(120, 22);
             label3.TabIndex = 10;
             label3.Text = "Contraseña:";
             // 
@@ -88,9 +93,9 @@
             label2.AutoSize = true;
             label2.BackColor = Color.Thistle;
             label2.Font = new Font("Rockwell", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(138, 133);
+            label2.Location = new Point(102, 177);
             label2.Name = "label2";
-            label2.Size = new Size(156, 19);
+            label2.Size = new Size(191, 22);
             label2.TabIndex = 9;
             label2.Text = "Nombre de usuario:";
             // 
@@ -99,18 +104,18 @@
             label1.AutoSize = true;
             label1.BackColor = Color.Thistle;
             label1.Font = new Font("Stencil", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(272, 22);
+            label1.Location = new Point(255, 29);
             label1.Name = "label1";
-            label1.Size = new Size(211, 42);
+            label1.Size = new Size(263, 52);
             label1.TabIndex = 8;
             label1.Text = "Tus datos:";
             // 
             // datosUsuarioEditar
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.FONDO_2;
-            ClientSize = new Size(720, 450);
+            ClientSize = new Size(720, 600);
             Controls.Add(txtContraseña);
             Controls.Add(txtNombre);
             Controls.Add(btnAceptar);
@@ -118,8 +123,12 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(3, 4, 3, 4);
+            MaximizeBox = false;
             Name = "datosUsuarioEditar";
-            Text = "datosUsuario";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "The BookWorm Society";
             Load += datosUsuarioEditar_Load;
             ResumeLayout(false);
             PerformLayout();

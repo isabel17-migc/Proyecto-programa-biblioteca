@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(datosUsuario));
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
@@ -42,9 +43,9 @@
             label1.AutoSize = true;
             label1.BackColor = Color.Thistle;
             label1.Font = new Font("Stencil", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(281, 12);
+            label1.Location = new Point(217, 16);
             label1.Name = "label1";
-            label1.Size = new Size(211, 42);
+            label1.Size = new Size(263, 52);
             label1.TabIndex = 0;
             label1.Text = "Tus datos:";
             // 
@@ -53,9 +54,9 @@
             label2.AutoSize = true;
             label2.BackColor = Color.Thistle;
             label2.Font = new Font("Rockwell", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(147, 123);
+            label2.Location = new Point(97, 164);
             label2.Name = "label2";
-            label2.Size = new Size(156, 19);
+            label2.Size = new Size(191, 22);
             label2.TabIndex = 1;
             label2.Text = "Nombre de usuario:";
             // 
@@ -64,17 +65,18 @@
             label3.AutoSize = true;
             label3.BackColor = Color.Thistle;
             label3.Font = new Font("Rockwell", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(147, 169);
+            label3.Location = new Point(97, 225);
             label3.Name = "label3";
-            label3.Size = new Size(99, 19);
+            label3.Size = new Size(120, 22);
             label3.TabIndex = 2;
             label3.Text = "Contraseña:";
             // 
             // btnRegresar
             // 
-            btnRegresar.Location = new Point(555, 12);
+            btnRegresar.Location = new Point(540, 16);
+            btnRegresar.Margin = new Padding(3, 4, 3, 4);
             btnRegresar.Name = "btnRegresar";
-            btnRegresar.Size = new Size(75, 23);
+            btnRegresar.Size = new Size(86, 31);
             btnRegresar.TabIndex = 3;
             btnRegresar.Text = "Regresar";
             btnRegresar.UseVisualStyleBackColor = true;
@@ -82,9 +84,10 @@
             // 
             // btnEditar
             // 
-            btnEditar.Location = new Point(636, 12);
+            btnEditar.Location = new Point(632, 16);
+            btnEditar.Margin = new Padding(3, 4, 3, 4);
             btnEditar.Name = "btnEditar";
-            btnEditar.Size = new Size(75, 23);
+            btnEditar.Size = new Size(86, 31);
             btnEditar.TabIndex = 4;
             btnEditar.Text = "Editar";
             btnEditar.UseVisualStyleBackColor = true;
@@ -92,27 +95,29 @@
             // 
             // txtNombre
             // 
-            txtNombre.Location = new Point(309, 119);
+            txtNombre.Location = new Point(282, 159);
+            txtNombre.Margin = new Padding(3, 4, 3, 4);
             txtNombre.Name = "txtNombre";
             txtNombre.ReadOnly = true;
-            txtNombre.Size = new Size(321, 23);
+            txtNombre.Size = new Size(366, 27);
             txtNombre.TabIndex = 5;
             // 
             // txtContraseña
             // 
-            txtContraseña.Location = new Point(252, 165);
+            txtContraseña.Location = new Point(217, 220);
+            txtContraseña.Margin = new Padding(3, 4, 3, 4);
             txtContraseña.Name = "txtContraseña";
-            txtContraseña.PasswordChar = '*';
             txtContraseña.ReadOnly = true;
-            txtContraseña.Size = new Size(321, 23);
+            txtContraseña.Size = new Size(366, 27);
             txtContraseña.TabIndex = 6;
+            txtContraseña.UseSystemPasswordChar = true;
             // 
             // datosUsuario
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.FONDO_2;
-            ClientSize = new Size(723, 450);
+            ClientSize = new Size(720, 600);
             Controls.Add(txtContraseña);
             Controls.Add(txtNombre);
             Controls.Add(btnEditar);
@@ -120,8 +125,12 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(3, 4, 3, 4);
+            MaximizeBox = false;
             Name = "datosUsuario";
-            Text = "datosUsuario";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "The BookWorm Society";
             Load += datosUsuario_Load;
             ResumeLayout(false);
             PerformLayout();

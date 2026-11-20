@@ -4,18 +4,32 @@ using MySql.Data.MySqlClient;
 using pantalla_inicio;
 using pantalla_loig_in;
 using System.Data;
+using System.Drawing.Text;
+
 
 namespace Biblioteca
 {
+
     public partial class Biblioteca1 : Form
     {
+        private bool cargarCombos = true; // Variable booleana, con el proposito que filtre los combobox una vez por ambos y no uno por uno
+        private void CargarLibros()
+        {
+            string estrella = cb_estre.SelectedItem?.ToString() ?? "Todos"; //Primero SelectedItem es la opcion que seleccionaste,
+            //El ToString lo convierte a texto,y el ?? Todos hace que si es nulo, se ponga en Todos asi no marca error
 
+            string genero = cb_genero.SelectedItem?.ToString() ?? "Todos";
 
+            //LLAMO A LA CLASE QUE CARGA LOS LIBROS
+            //primero este donde se guardan los datos
+            DataTable resultado = MostrarLibros.ConsultaLibros(estrella, genero);
+            MostrarLibros.CrearLibros(resultado, FlbBiblioteca!); //le puse ese ! porque si no me dice que no acepta nulos y se supone es para que sepa que no es nulo o que no le voy a mandar nulos
 
-
+        }
         public Biblioteca1()
         {
             InitializeComponent();
+   
         }
 
         private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -25,7 +39,11 @@ namespace Biblioteca
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            if (cargarCombos == true)
+            {
+                return;
+            }
+            CargarLibros();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -35,53 +53,54 @@ namespace Biblioteca
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            if (cargarCombos == true)
+            {
+                return;
+            }
+            CargarLibros();
         }
 
         private void Biblioteca1_Load(object sender, EventArgs e)
         {
             
             cb_estre.Items.Clear(); //Limpiamos primero el combobox de los items de la conexion anterior
-            cb_autor.Items.Clear(); //Limpiamos primero el combobox de los items de la conexion anterior
+            cb_genero.Items.Clear(); //Limpiamos primero el combobox de los items de la conexion anterior
 
+            cb_estre.Items.Add("Todos");
 
+            for(int i=1; i<=5; i++)
+            {
+                cb_estre.Items.Add(i);
+            }
+            cb_estre.SelectedIndex = 0;
 
             using (MySqlConnection cn = conexion.ObtenerConexion())
             {
                 cn.Open();
 
-                MySqlCommand comandoCalificaciones = new MySqlCommand(
-                    "Select distinct calificacion from libros order by calificacion asc", cn
+                MySqlCommand comandoGeneros = new MySqlCommand(
+                    "Select genero from genero", cn
                 );
 
-                using (MySqlDataReader calificacion = comandoCalificaciones.ExecuteReader())
-                {
-                    while (calificacion.Read())
-                    {
-                        cb_estre.Items.Add(calificacion["calificacion"].ToString());
-                    }
-                }
+                cb_genero.Items.Add("Todos");
 
-                MySqlCommand comandoAutores = new MySqlCommand(
-                    "Select distinct nombre from autores order by nombre", cn
-                );
-
-                using (MySqlDataReader autores = comandoAutores.ExecuteReader())
+                using (MySqlDataReader generos = comandoGeneros.ExecuteReader())
                 {
-                    while (autores.Read())
+                    while (generos.Read())
                     {
-                        cb_autor.Items.Add(autores["nombre"].ToString());
+                        cb_genero.Items.Add(generos["genero"]);
                     }
+
+                    cb_genero.SelectedIndex = 0;
                 }
 
                 cn.Close();
+
             }
 
+            cargarCombos = false; //Ya que esta en false, ya se puede filtrar los combobox
 
-            //LLAMO A LA CLASE QUE CARGA LOS LIBROS
-            //primero este donde se guardan los datos
-            DataTable resultado = MostrarLibros.ConsultaLibros();
-            MostrarLibros.CrearLibros(resultado, FlbBiblioteca!); //le puse ese ! porque si no me dice que no acepta nulos y se supone es para que sepa que no es nulo o que no le voy a mandar nulos
+            CargarLibros();
         }
 
 
