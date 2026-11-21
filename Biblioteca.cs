@@ -20,16 +20,18 @@ namespace Biblioteca
 
             string genero = cb_genero.SelectedItem?.ToString() ?? "Todos";
 
+            string barra = txt_barra.Text.Trim(); // Obtener el texto del cuadro
+
             //LLAMO A LA CLASE QUE CARGA LOS LIBROS
             //primero este donde se guardan los datos
-            DataTable resultado = MostrarLibros.ConsultaLibros(estrella, genero);
+            DataTable resultado = MostrarLibros.ConsultaLibros(estrella, genero, barra);
             MostrarLibros.CrearLibros(resultado, FlbBiblioteca!); //le puse ese ! porque si no me dice que no acepta nulos y se supone es para que sepa que no es nulo o que no le voy a mandar nulos
 
         }
         public Biblioteca1()
         {
             InitializeComponent();
-   
+
         }
 
         private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -62,13 +64,13 @@ namespace Biblioteca
 
         private void Biblioteca1_Load(object sender, EventArgs e)
         {
-            
+
             cb_estre.Items.Clear(); //Limpiamos primero el combobox de los items de la conexion anterior
             cb_genero.Items.Clear(); //Limpiamos primero el combobox de los items de la conexion anterior
 
             cb_estre.Items.Add("Todos");
 
-            for(int i=1; i<=5; i++)
+            for (int i = 1; i <= 5; i++)
             {
                 cb_estre.Items.Add(i);
             }
@@ -181,6 +183,14 @@ namespace Biblioteca
 
             dashboard.Show();
             this.Hide();
+        }
+
+        private void txt_barra_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                CargarLibros();
+            }
         }
     }
 }

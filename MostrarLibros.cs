@@ -20,7 +20,7 @@ namespace pantalla_inicio
       
 
         //AHORA VOY A PONER EL METODO QUE PRIMERO VA A REALIZAR LA CONSULTA PRINCIPAL, LA QUE CARGA TODOS LOS LIBRO
-        public static DataTable ConsultaLibros(string estrella="Todos", string genero="Todos") //Parametros del metodo
+        public static DataTable ConsultaLibros(string estrella="Todos", string genero="Todos", string barra="") //Parametros del metodo
         {
 
             string consulta = ConsultaSql; //creo una copia para que aqui se guarden los cambios de la consultas, ya que el original es static
@@ -48,6 +48,13 @@ namespace pantalla_inicio
                     "g.id_genero = gl.id_genero " +
                     "WHERE g.genero = @genero)";
                 parametros.Add(new MySqlParameter("@genero", genero));
+            }
+
+
+            if (!string.IsNullOrWhiteSpace(barra))
+            {
+                consulta += " AND titulo LIKE @barra";
+                parametros.Add(new MySqlParameter("@barra", $"%{barra.Trim()}%"));
             }
 
             return conexion.Leer(consulta, parametros.ToArray()); //Se cambio los parametros a arreglos otravez, porque Leer pide arreglo no lista

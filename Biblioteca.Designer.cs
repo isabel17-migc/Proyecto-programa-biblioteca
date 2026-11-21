@@ -35,7 +35,7 @@
             btnbiblioteca = new Button();
             btnusuario = new Button();
             btnagg = new Button();
-            textBox1 = new TextBox();
+            txt_barra = new TextBox();
             cb_estre = new ComboBox();
             cb_genero = new ComboBox();
             FlbBiblioteca = new FlowLayoutPanel();
@@ -140,13 +140,14 @@
             btnagg.UseVisualStyleBackColor = true;
             btnagg.Click += btnagg_Click_1;
             // 
-            // textBox1
+            // txt_barra
             // 
-            textBox1.Location = new Point(197, 11);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(309, 27);
-            textBox1.TabIndex = 5;
-            textBox1.TextChanged += textBox1_TextChanged;
+            txt_barra.Location = new Point(197, 11);
+            txt_barra.Name = "txt_barra";
+            txt_barra.Size = new Size(309, 27);
+            txt_barra.TabIndex = 5;
+            txt_barra.TextChanged += textBox1_TextChanged;
+            txt_barra.KeyDown += txt_barra_KeyDown;
             // 
             // cb_estre
             // 
@@ -211,7 +212,7 @@
             Controls.Add(FlbBiblioteca);
             Controls.Add(cb_genero);
             Controls.Add(cb_estre);
-            Controls.Add(textBox1);
+            Controls.Add(txt_barra);
             Controls.Add(panel1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Biblioteca1";
@@ -228,7 +229,7 @@
         #endregion
 
         private Panel panel1;
-        private TextBox textBox1;
+        private TextBox txt_barra;
         private ComboBox cb_estre;
         private ComboBox cb_genero;
         private Button button1;
